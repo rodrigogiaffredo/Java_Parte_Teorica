@@ -1,0 +1,251 @@
+
+OPERADORES RELACIONAIS E LÓGICOS
+--------------------------------
+
+A Essência das Comparações (Operadores Relacionais)
+---------------------------------------------------
+
+Os operadores relacionais são os blocos básicos. Eles funcionam exclusivamente com dois operandos
+(elementos), comparando a magnitude ou a igualdade entre eles. É importante notar que, em Java, o
+símbolo de igualdade é dobrado (==), pois um sinal simples (=) é reservado para atribuir valores 
+a variáveis.
+
+------------------------------------
+Operador      |      Significado
+------------------------------------
+   ==         |      igual a 
+   !=         |      diferente de 
+   >          |      maior que 
+   <          |      menor que 
+   >=         |      maior ou igual 
+   <=         |      menor ou igual
+
+
+A Lógica de Decisão Complexa (Operadores Lógicos)
+-------------------------------------------------
+
+Na programação real, as decisões dependem de múltiplos fatores. Os operadores lógicos funcionam como
+conectores que permitem agrupar várias comparações relacionais em uma única regra de negócio:
+
+Operador && (E): É o operador da exigência. Ele só permite um resultado positivo se todas as 
+                 condições forem satisfeitas simultaneamente. Imagine um sistema de login: você 
+                 precisa do usuário correto E da senha correta.
+
+Operador || (OU): É o operador da alternativa. Ele é mais flexível: se qualquer uma das condições 
+                  for verdade, o resultado final será verdadeiro. No hospital, um alerta pode soar 
+                  se a pressão estiver alta OU se o batimento cardíaco estiver instável.
+
+Operador ! (NÃO): Este é o operador de inversão. Ele nega o estado atual. Se um sistema diz que o 
+                  usuarioAtivo é false, o !usuarioAtivo será true. É útil para verificar o que "não"
+                  deve acontecer.
+
+
+----------------------------------------------------------------------------------------------------
+Operador      |      Significado   |                     Comportamento Lógico                      |
+----------------------------------------------------------------------------------------------------
+   &&         |      E (AND)       |      Exigência: só resulta em TRUE se todas as partes forem
+              |                    |                 verdadeiras.
+   ||         |      OU (OR)       |      Alternativa: se qualquer uma das condições for verdade, o 
+              |                    |                   resultado final será verdadeiro.
+   !          |      NÃO (NOT)     |      Inversão: inverte o estado booleano (o que é FALSE vira 
+              |                    |                TRUE, e vice-versa).
+
+
+
+Ordem de Avaliação e Precedência
+--------------------------------
+
+Na programação, assim como na matemática, existe uma ordem de prioridade. Se misturarmos vários 
+operadores em uma única linha, o Java não lerá simplesmente da esquerda para a direita; ele seguirá
+uma hierarquia. Quando o Java encontra uma expressão complexa, ele resolve os operadores nesta ordem:
+
+1- Parênteses (): Sempre resolvidos primeiro. Use-os para forçar uma lógica ou clarear o código.
+2- Operador de Negação !: O "NÃO" tem prioridade sobre os outros lógicos.
+3- Relacionais (>, <, ==, etc.): As comparações matemáticas vêm em seguida.
+4- Conectivo &&: O "E" é processado antes do "OU".
+5- Conectivo ||: O "OU" é o último na fila de prioridade.
+
+
+Decisão Simples - IF
+--------------------
+
+Sintaxe: 'if' seguido de parênteses, que é onde insiro a expressão lógica a ser testada; Quando
+         necessário, utilizo chaves para delimitar o bloco de código a ser executado somente se 
+         a condição for atendida.
+
+Exemplo de execução de instrução única (sem a necessidade de bloco de código adicional):
+
+if(oxigenacao < 92)
+   System.out.println("Alerta: Nível Crítico!"); //Única linha protegida
+System.out.println("Monitoramento ativo."); // Esta linha SEMPRE será executada
+
+Exemplo de execução de instrução com múltiplas ações (com o bloco de código adicional):
+
+if(oxigenacao < 92) {
+   System.out.println("Alerta: Nível Crítico!");
+   System.out.println("Protocolo de emergência ativado.");
+   ligarAlarmeSonoro();
+}
+
+
+Fluxo Alternativo - ELSE 
+------------------------
+
+O ELSE define o que o programa deve fazer quando a parte entre parênteses do IF resultar em FALSE.
+Trata-se do destino automático para todos os casos que não se encaixem na condição inicial.
+
+Sintaxe: 'else' seguido de chaves.
+
+Exemplo de 'else' aplicado ao código utilizado para ilustrar o 'if':
+
+if(oxigenacao < 92) {
+   // Caminho verdadeiro
+   System.out.println("ALERTA: Oxigenação baixa!");
+} else {
+   // Caminho falso
+   System.out.println("Sinais estáveis: Oxigenação em nível seguro.");
+}
+
+Nota: 'if' / 'else' é uma estrutura exclusiva; se 'if' for verdadeiro, o 'else' é ignorado.
+
+
+Aninhamento de IFs
+------------------
+* Fragmento retirado da literatura recomendada "SCHILDT, Herbert. Java para Iniciantes. 6. ed. 
+  Porto Alegre: Bookman, 2015. E-book. p. 64-68".
+
+Um 'if' aninhado é uma instrução 'if' que é alvo de outro 'if' ou 'else'. Os 'ifs' aninhados são 
+muito comuns em programação. O importante a lembrar sobre 'ifs' aninhados em Java é o fato de que 
+uma instrução 'else' será sempre referente à instrução 'if' mais próxima que estiver dentro do 
+mesmo bloco e ainda não estiver associada a um 'else'.
+
+Exemplo:
+
+if (i == 10) {
+   if (j < 20) a = b;
+   if (k > 100) c = d;
+   else a = c; // Esse 'else' é referente a if (k > 100) por ser o mais próximo no mesmo bloco.
+}
+else a = d; // Esse 'else' é referente a if (i == 10) pois está fora do bloco assim como ele.
+
+
+
+Sintaxe do ELSE IF
+------------------
+
+O ELSE IF é usado para implementar múltiplas faixas de decisão; essa estrutura só é consultada se 
+a condição anterior (o primeiro 'if' ou um 'else if' anterior) for FALSE. As consultas continuam
+até que alguma delas seja atendida, ou até que o programa chegue ao 'else' final.
+
+Exemplo de estrutura básica:
+
+if (condicao1) {
+   // Executa se condicao1 for TRUE 
+} else if (condicao2) {
+   // Executa se condicao1 for FALSE e condicao2 for TRUE 
+} else {
+   // Executa se TODAS as anteriores forem FALSE
+}
+
+Nota: em Java, as condições são executadas de cima para baixo, e o programa para na primeira que for
+      verdadeira, ou seja, a ordem de escrita do programa altera completamente seu resultado.
+
+
+Para consolidar a aprendizagem em 'if-then' e 'if-then-else', principalmente sintaxe, pontuação,
+uso de chaves e do 'else if': https://docs.oracle.com/javase/tutorial/java/nutsandbolts/if.html
+
+
+
+O Seletor de Opções Fixas - SWITCH
+----------------------------------
+
+O 'switch' (tradução: interruptor ou chave) entra como uma evolução lógica para simplificar esses 
+menus. Em vez de avaliar se uma condição é “verdadeira ou falsa” em cada linha, o Java olha para o
+valor da variável e salta diretamente para a opção correspondente. Esta é a estrutura ideal para 
+menus, categorias e qualquer cenário onde as opções sejam conhecidas e constantes.
+
+Estrutura:
+
+1- Variável de controle
+2- Casos (case)
+3- Interrupção (break)
+4- Valor padrão (default)
+
+O 'switch' usa chaves para delimitar todo o bloco de opções, e não cada condição individualmente.
+
+Exemplo de escolha de um setor hospitalar usando Java:
+
+int setor = 2;
+switch (setor) {
+   case 1:
+      System.out.println("Configuração: UTI");
+      break;
+   case 2:
+      System.out.println("Configuração: Emergência");
+      break;
+   case 3:
+      System.out.println("Configuração: Quarto Comum");
+      break;
+   default:
+      System.out.println("Setor Inválido");
+      break;
+}
+
+
+Componentes principais:
+
+- switch (variável): define o valor a ser testado; pode ser um número (int), um caractere (char),
+                     ou um texto (String).
+
+- case valor: representa as opções disponíveis; seguido de dois pontos após o valor.
+
+- break: comando que encerra a execução do 'switch'; sem ele, o Java continuaria executando os
+         próximos casos; comando seguido de ponto e vírgula.
+
+- default: funcionamento idêntico ao do 'else'; é executado se nenhum dos cases for compatível com
+           a variável; seguido de dois pontos.
+
+
+Nota: o 'switch' não aceita qualquer tipo de variável no Java. Posso usar apenas:
+
+1- Tipos integrais: byte, short, char, int.
+2- Classes Embrulho (Wrapper): Byte, Short, Character, Integer.
+3- Strings (conjuntos de caracteres).
+4- Enums (tipos enumerados).
+
+Portanto, não é possível utilizar 'switch' com números decimais (float ou double), nem com valores
+booleanos. Para esses casos, a única opção correta é o IF-ELSE.
+
+
+Aninhamento de SWITCHs
+----------------------
+* Fragmento retirado da literatura recomendada "SCHILDT, Herbert. Java para Iniciantes. 6. ed. 
+  Porto Alegre: Bookman, 2015. E-book. p. 68-71".
+
+
+́É possível um 'switch' fazer parte da sequência de instruções de um 'switch' externo. Isso é chamado
+de 'switch' aninhado. Mesmo se as constantes 'case' do 'switch' interno e externo tiverem valores 
+comuns, não ocorrerá conflito. Por exemplo, o fragmento de código a seguir é perfeitamente aceitável:
+
+switch(ch1) { 
+   case 'A': System.out.println("This A is part of outer switch.");
+      switch(ch2) { 
+         case 'A':
+            System.out.println("This A is part of inner switch");
+            break; 
+         case 'B': // ...
+      } // fim do switch interno
+      break; 
+   case 'B': // ...
+   ...
+   ...
+}
+
+
+-------------------------------------
+
+
+
+
+
+
