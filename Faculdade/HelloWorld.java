@@ -1,4 +1,4 @@
-package Faculdade;
+
 
 /**
  * Hello, World! Proposto no tutorial de validação da instalação do Java no VS Code.

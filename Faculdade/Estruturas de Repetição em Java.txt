@@ -1,0 +1,392 @@
+
+ESTRUTURAS DE REPETIÇÃO EM JAVA
+
+Uma estrutura repetitiva (laço) é um bloco que executa repetidamente enquanto uma condição for 
+verdadeira ou até uma condição ser atingida. Um laço sempre tem quatro elementos, mesmo quando 
+não aparecem “explicitamente” na mesma linha:
+
+1. Inicialização (onde tudo começa)
+2. Condição (quando continua e quando para)
+3. Corpo (o que se repete)
+4. Atualização (o que muda a cada volta)
+
+
+Laços de repetição em Java e casos de uso gerais
+------------------------------------------------
+
+1- FOR (Repetições Contadas)
+
+Ideal para quando sei exatamente quantas vezes o bloco de código precisa ser repetido.
+Modelo mental: execute a ação por 10 vezes.
+
+2- WHILE (Repetições Condicionais)
+
+Usado quando a repetição depende de uma condição que precisa ser verificada ANTES da execução.
+Modelo mental: continue pedindo a entrada enquanto ela for inválida.
+
+3- DO-WHILE (Execução Garantida)
+
+Perfeito para situações onde o bloco de código deve executar PELO MENOS UMA vez antes de a condição
+ser checada.
+Modelo mental: peça a senha uma vez, e continue pedindo enquanto ela estiver errada.
+
+
+Anatomia do FOR
+---------------
+
+O 'for' é um laço que “encapsula” três decisões importantes em um único lugar:
+
+- De onde começa (inicialização).
+- Até quando vai (condição).
+- Como avança (atualização).
+
+Por isso, o for é ótimo para repetição “contável”.
+
+Quando escrevo...
+for (int i = 1; i <= amostras; i++)
+... estou fazendo uma promessa: “vou repetir exatamente 'amostras' vezes, indo de 1 em 1”.
+
+Estrutura genérica do comando 'for':
+
+for(inicializacao; condicao; atualizacao) {
+    // corpo do laço
+}
+
+- Inicialização: geralmente cria o contador (int i = 1).
+- Condição: define quando continua (i <= n).
+- Atualização: muda o contador (i++).
+- Corpo: executa o trabalho (ler valor, somar, comparar, imprimir).
+
+
+Contador x Acumulador (o par mais comum em repetição)
+-----------------------------------------------------
+
+- Contador (i): controla a repetição garantindo QUANTIDADE
+- Acumulador (soma): junta os resultados garantindo RESULTADO FINAL
+
+Exemplo simples: somar N valores
+
+// Inicializa a variável soma com 0
+double soma = 0.0;
+// Laço que executa 'n' vezes para ler os valores e somá-los
+for (int = 1; i <= n; i++) {
+    // Lê o valor do usuário
+    double valor = entrada.nextDouble();
+    // Acumula o valor lido na variável 'soma'
+    soma += valor;
+}
+
+Passo (step)
+------------
+
+Nem toda repetição é feita 'de 1 em 1'.
+
+Por vezes, quero processar apenas posições pares, ou executar uma tarefa de 2 em 2, ou contar ao 
+contrário.
+
+// Laço que imprime números pares de 0 até 10
+for (int = 1; i <= 10; i += 2) {
+    // Exibe o valor atual de 'i'
+    System.out.println(i);
+}
+
+// Laço que imprime números de 10 até 1 (ordem decrescente)
+for (int = 10; i >= 1, i--) {
+    // Exibe o valor atual de 'i'
+    System.out.println(i);
+}
+
+
+WHILE e DO-WHILE (diferença essencial: testar antes ou testar depois)
+---------------------------------------------------------------------
+
+A diferença mais importante entre 'while' e 'do-while' é o momento em que a condição é verificada:
+
+- WHILE: verifica a condição antes de executar o corpo.
+- DO-WHILE: executa o corpo pelo menos uma vez e só depois verifica a condição.
+
+Isso parece pequeno, mas muda completamente o comportamento do programa em situações como “pedir
+um dado ao usuário”. Se você precisa pedir o dado pelo menos uma vez, o 'do-while' costuma ser mais
+natural.
+
+Exemplo de 'while' com validação para leitura já existente:
+
+O padrão mais comum de 'while' é ler uma vez, testar, e repetir enquanto estiver válido.
+
+// Solicitar ao usuário a quantidade de amostras
+System.out.println("Informe a quantidade de amostras (maior do que zero): ");
+    int amostras = entrada.nextInt();
+    // Enquanto o valor for menor ou igual a zero, continua pedindo novamente
+        while (amostras <= 0) {
+            System.out.println("Valor inválido. Digite novamente: ");
+            amostras = entrada.nextInt();
+        }
+
+Esse padrão é importante porque explicita a regra de não avançar enquanto a entrada não estiver
+correta, e também porque reforça o ponto de segurança: a variável precisa ser atualizada DENTRO
+do laço.
+
+
+Exemplo de 'do-while' para validação com perguntar sempre:
+
+O padrão é pedir e ler dentro do bloco, e só depois validar.
+
+// Declarar a variável int amostras
+int amostras;
+// Executar pelo menos uma vez e repetir enquanto o valor for inválido
+do {
+    System.out.print("Informe a quantidade de amostras (maior do que zero): ");
+    amostras = entrada.nextInt();
+} while (amostras <= 0);
+
+
+Esse padrão é útil quando quero evitar código duplicado. O pedido ao usuário fica apenas uma vez
+dentro do laço, ajudando bastante quando o fluxo natural é perguntar -> ler -> verificar.
+
+
+Laços aninhados (BREAK / CONTINUE)
+----------------------------------
+
+Os laços aninhados são estruturas de repetição em que um laço é declarado dentro de outro. Nesse 
+caso, para cada iteração do laço externo, o laço interno é executado completamente. Essa técnica é
+muito utilizada quando é necessário percorrer estruturas bidimensionais, como matrizes, ou realizar
+comparações entre todos os elementos de um conjunto de dados.
+
+Em Java, é possível aninhar qualquer estrutura de repetição, seja 'for', 'while' ou 'do-while'.
+
+for(int linha = 1; linha <= 3; linha++) {
+    for(int coluna = 1; coluna <= 4; coluna++) {
+        System.out.print("(" + linha + "," + coluna + ") ");
+    }
+    System.out.println();
+}
+
+
+Instrução BREAK
+---------------
+
+A instrução 'break' é utilizada para interromper imediatamente a execução de um laço de repetição 
+ou de uma estrutura 'switch'. Quando executada dentro de um laço, o controle do programa é 
+transferido para a primeira instrução após o término da estrutura de repetição.
+
+Essa instrução é útil quando uma determinada condição torna desnecessária a continuação das 
+iterações.
+
+Exemplo:
+
+for(int = 1; i <= 10; i++) {
+    if(i == 6) {
+        break;
+    }
+    System.out.println(i);
+}
+
+
+
+Instrução CONTINUE
+------------------
+
+A instrução 'continue' é utilizada para interromper apenas a iteração atual de um laço, fazendo com
+que a execução passe diretamente para a próxima repetição. Diferentemente do break, ela não encerra
+o laço, apenas ignora o restante das instruções da iteração corrente.
+
+Essa instrução é útil quando determinadas condições exigem que uma iteração seja descartada sem 
+interromper o processamento completo.
+
+Exemplo:
+
+for(int = 1; i <= 10; i++) {
+    if (i % 2 == 0) {
+        continue;
+    }
+    System.out.println(i);
+}
+
+No código acima, quando 'i' é um número par, o comando 'continue' faz com que o restante da 
+iteração seja ignorado, imprimindo apenas os números ímpares.
+
+
+Nota: enquanto a instrução 'break' encerra completamente o laço de repetição, transferindo o 
+      controle para a instrução seguinte ao laço, a instrução 'continue' interrompe apelas a 
+      iteração atual e inicia imediatamente a repetição do laço.
+
+
+IMPLEMENTANDO LAÇOS 
+-------------------
+Trecho extraído do livro HORSTMANN, Cay. Conceitos de Computação com Java. Porto Alegre: 
+Bookman, 2009. E-book. p. 242 - 244.
+
+Escrevemos laços porque nosso programa precisa repetir uma ação várias vezes. Há diversos tipos de
+laços e nem sempre é óbvio como estruturar comandos deste tipo. O processo mental envolvido na
+programação de um laço é o seguinte:
+
+Passo 1 - Listar o trabalho que precisa ser feito em cada passo do corpo do laço.
+---------------------------------------------------------------------------------
+
+Por exemplo, se preciso ler os valores de entrada em galões e convertê-los em litros até que o
+final da entrada seja alcançado. As operações são:
+
+- Ler a entrada
+- Converter a entrada em litros
+- Imprimir a resposta
+
+Se preciso verificar os caracteres de uma string e contar as vogais. As operações são: 
+
+- Obter o próximo caracteres
+- Se for uma vogal, incrementar um contador
+
+Passo 2 - Descobrir a frequência com que o laço é repetido.
+-----------------------------------------------------------
+
+Respostas possíveis:
+
+- Dez vezes
+- Uma vez para cada caractere da string
+- Até o final da entrada ser alcançado
+- Enquanto o saldo for menor que o saldo pretendido
+
+Se um laço for executado um número definido de vezes, normalmente um laço 'for' será adequado. As 
+primeiras duas respostas acima levam a laços for:
+
+for (int i = 1; i <= 10; i++) ...
+for (int i = 0; i < str.length(); i++) ...
+
+As duas seguintes percisam ser implementadas como laços 'while' pois não sei quantas vezes o corpo 
+do laço será repetido.
+
+Passo 3 - Com um laço 'while', descobrir onde determinar se o laço terminou.
+----------------------------------------------------------------------------
+
+Há três possibilidades:
+
+- Antes de entrar no laço
+- No meio do laço
+- No fim do laço
+
+Por exemplo, se executar um laço enquanto o saldo é menor que o saldo alvo, posso verificar essa 
+condição no começo do laço. Se o saldo for menor que o saldo alvo, entro no laço. Se não for, 
+terminei. Nesse caso, o laço tem a seguinte forma:
+
+while (condição)
+{
+    Faz o trabalho
+}
+
+Mas verificar a entrada requer que ela seja lida. Isso significa que precisarei entrar no laço, ler 
+a entrada e então decidir se quero avançar. Meu laço tem essa forma:
+
+boolean done = false;
+while (!done)
+{
+    Faz o trabalho necessário para verificar a condição
+    if (condição)
+        done = true;
+    else 
+    {
+        Faz outro trabalho
+    }
+}
+
+Essa estrutura de laço também é chamada de "laço e meio".
+
+Por fim, se eu souber que preciso prosseguir depois de passar pelo laço uma vez, uso o 'do-while':
+
+do
+{
+    Faz o trabalho
+}
+while (condição)
+
+Mas esse tipo de laço é bastante raro na prática.
+
+Passo 4 - Implementar o laço adicionando as operações do Passo 1 ao corpo do laço.
+----------------------------------------------------------------------------------
+
+Ao escrever um laço 'for', normalmente uso o índice de laço dentro do seu corpo. Por exemplo, 
+"obtenha o próximo caractere" é implementado com a instrução:
+
+char ch = str.charAt(i);
+
+Passo 5 - Verificar duas vezes as inicializações das variáveis.
+---------------------------------------------------------------
+
+Se utilizar uma variável booleana 'done', devo me certificar de que ela é inicializada 
+como 'false'. Se acumular um resultado em uma variável 'sum' ou 'count', devo me certificar de 
+configurá-las como zero antes de entrar no laço pela primeira vez.
+
+Passo 6 - Verificar a possibilidade de erros "por um".
+------------------------------------------------------
+
+Penso nos cenários mais simples possíveis:
+
+- Se eu leio a entrada, o que acontece se não houver nenhuma entrada? E se houver exatamente uma
+  entrada?
+
+- Se examino os caracteres de uma string, o que acontece se a string estiver vazia? E se ela
+  tiver apenas um caractere?
+
+- Se acumulo valores até que algum alvo ser alcançado, o que acontece se o alvo for zero? E se for 
+  um valor negativo?
+
+Adicionalmente, devo investigar manualmente cada instrução do laço, incluindo todas as
+inicializações. Além de verificar cuidadosamente todas as condições, prestando atenção à diferença 
+entre comparações como < e <=. E também verificar que o laço não tenha sido percorrido nem uma
+única vez e que o resultado final seja aquele que eu espero.
+
+Ao escrever um laço 'for', devo verificar se seus limites devem ser *simétricos ou assimétricos, e 
+** contar o número de iterações.
+
+* Limites simétricos e assimétricos: é fácil escrever um laço com 'i' indo de '1' a 'n':
+
+for (i = 1; i <= n; i++) ...
+
+Os valores para 'i' estão limitados pela relação 1 <= i <= n. Como há comparações <= nos dois 
+limites, esses limites são chamados SIMÉTRICOS.
+
+Ao percorrer os caracteres de uma string, os limites são ASSIMÉTRICOS.
+
+for (i = 0; i < str.length(); i++) ...
+
+Os valores para 'i' estão limitados por 0 <= i < str.length(), com uma comparação <= à esquerda e 
+uma comparação < à direita. Isso é adequado porque str.length() não é uma posição válida.
+
+Nota: não é uma boa ideia forçar a simetria artificialmente, pois isso torna o código mais difícil
+      de ler e de entender.
+
+      for (i = 0; i <= str.length() - 1; i++) ...
+
+Para cada laço, devo considerar qual forma é mais natural para o problema, e utilizá-la.
+
+
+** Contar o número de iterações: localizar os limites superiores e inferiores corretos para uma
+iteração pode ser confuso.
+
+Devo iniciar em zero? Devo utilizar <= b ou < b como uma condição de término?
+
+Conto o número de iterações para verificar se o laço 'for' está correto. Contar o número de 
+iterações é um recurso muito útil para melhor entender um laço. A contagem é mais fácil para laços 
+com limites assimétricos. O laço 'for (i = a; i < b; i++) ...' é executado 'b - a' vezes.
+
+Por exemplo, o laço que percorre os caracteres de uma string 'for (i = 0; i <str.length(), i++) ...'
+executa str.length() vezes. Isso faz total sentido, porque há str.length() caracteres em uma string.
+
+O laço com limites simétricos 'for (i = a; i <= b; i++)' é executado 'b - a + 1' vezes .Esse '+ 1' 
+é a fonte de muitos erros de programação. Por exemplo 'for (n = 0; n <= 10; n++) executa 11 vezes.
+
+Se esse for o objetivo, tudo bem, caso contrário o ideal é inicializar o contador em '1' ou 
+utilizar < 10.
+
+Uma maneira de visualizar esse erro '+ 1' é pensar nas estacas e seções de uma cerca. Suponha que 
+a cerca tenha dez seções (=). Quantas estacas (|) ela tem? |=|=|=|=|=|=|=|=|=|=|
+
+Uma cerca com dez seções tem onze estacas. Cada seção tem uma estaca à esquerda e há mais uma 
+estaca depois da última seção. Esquecer de contar a última iteração de um laço '<=' é chamado
+frequentemente de 'erro de estaca de cerca'.
+
+Se o incremento for um valor 'c' diferente de 1 e 'c' divide 'b - a', então as contagens serão:
+
+(b - a) / c         para o laço assimétrico
+(b - a) / c + 1     para o laço simétrico 
+
+Por exemplo, o laço 'for (i = 10; i <= 40; i += 5) executa (40 - 10)/5 + 1 = 7 vezes.
+

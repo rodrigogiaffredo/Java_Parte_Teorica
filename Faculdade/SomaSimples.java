@@ -1,4 +1,4 @@
-package Faculdade;
+
 
 /**
  * Primeiro exercício da faculdade (12/08/2026): fazendo uma soma simples
