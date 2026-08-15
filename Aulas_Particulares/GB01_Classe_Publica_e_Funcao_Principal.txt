@@ -1,0 +1,76 @@
+
+Profa. Giuliana Bezerra
+
+WORA - Write Once, Run Anywhere
+
+O aspecto mais revolucionário do Java, bastante alardeado pela Sun Microsystems para promover o potencial 
+da linguagem, é o fato de que, através de sua máquina virtual (JVM), o código fonte escrito uma vez
+poderia ser transformado em linguagem de máquina facilmente, independentemente do sistema operacional.
+
+                                                                            Código de Máquina
+                                                                   ---JVM        Linux
+                                                                   |
+Código         javac                     Bytecode                  |         Código de Máquina
+Fonte   --- (compilar) --- Compilador ---(.class) ---Interpretador ---JVM        Windows
+(.java)                                                            |
+                                                                   |         Código de Máquina
+                                                                   ---JVM         MacOS
+
+JDK: Java Development Kit (ambiente de desenvolvimento com ferramentas como javac, jheap, jconsole, etc.)
+JRE: Java Runtime Environment (ambiente de execução com a Java Class Library e a máquina virtual JVM)
+JVM: Java Virtual Machine
+
+---------------------------------
+CLASSE PÚBLICA E FUNÇÃO PRINCIPAL
+---------------------------------
+
+Todo programa em Java exige a existência de pelo menos uma CLASSE, daí o fato de usarmos a sintaxe que
+declara uma classe pública, informa seu nome, e imediatamente abre e fecha um bloco de comandos dessa 
+classe através do uso de chaves '{ }' - normalmente as IDEs já criam ambas quando digitamos somente a de
+abertura, e as deixa de uma determinada cor.
+
+A JVM procura classes nos códigos fonte para executar os programas, e o nome da classe deve representar a 
+aplicação do programa no mundo real, para facilitar a compreensão e a manutenção do código. Por exemplo,
+se vou criar um programa de soma simples, a classe pública deve se chamar 'SomaSimples'.
+
+O nome da classe segue o padrão 'CamelCase', que usa letras maiúsculas para separar palavras, ao invés
+de sublinhados.
+
+public class Gb01OlaMundo {
+
+}
+
+
+Logo após a abertura do bloco de comandos da classe, temos a definição de uma FUNÇÃO PRINCIPAL identada.
+Por exemplo:
+
+public class Gb01OlaMundo {
+
+    public static void main(String[] args) {
+
+    }
+}
+
+Todo programa Java deve ter esta função principal (main) declarada conforme descrito acima. Num arquivo
+.java, a própria IDE do VS Code auto-completa a função principal caso eu digite main e selecione a 
+primeira opção da lista.
+
+Logo após a declaração da função principal, é aberto um novo bloco de comandos através do uso de chaves, 
+e novamente a IDE as diferencia com uma cor específica. Esses será os comandos executados pela função
+principal. Por exemplo:
+
+public class Gb01OlaMundo {
+
+    public static void main(String[] args) {
+        System.out.println("Olá, Mundo!");
+    }
+}
+
+No caso, o comando System.out.println executa uma saída de impressão no sistema, com quebra de linha no
+final do texto impresso. O conteúdo impresso é o texto que aparece entre parênteses e aspas duplas logo
+após o comando (no meu exemplo, será impressa a frase 'Olá, Mundo!'), o qual é delimitado pelo
+símbolo ';'.
+
+Toda instrução contida num bloco de comandos em Java é finalizada com o sinal de ponto e vírgula ';'.
+
+
