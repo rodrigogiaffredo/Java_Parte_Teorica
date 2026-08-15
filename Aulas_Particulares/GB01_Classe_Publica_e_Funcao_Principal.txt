@@ -73,4 +73,11 @@ símbolo ';'.
 
 Toda instrução contida num bloco de comandos em Java é finalizada com o sinal de ponto e vírgula ';'.
 
+A função principal é o entry point dos programas escritos em Java, sendo portanto obrigatória em qualquer
+programa escrito nessa linguagem.
+
+Quando compilo o código usando o comando 'javac nomedoarquivo.java' via terminal, estou exatamente criando
+o arquivo bytecode (.class) do programa, o qual é submetido a JVM e executado normalmente, tendo sua saída
+exibida no terminal da IDE (no meu caso o VS Code).
+
 
