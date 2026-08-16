@@ -1,0 +1,439 @@
+
+--------------------------------------
+ESTRUTURAS DE CONTROLE E MODULARIZAÇÃO
+--------------------------------------
+
+A modularização é uma técnica que permite organizar seu código em partes menores e mais 
+gerenciáveis (conhecidas como MÓDULOS), facilitando a manutenção e a reutilização*.
+
+* Princípio DRY: Don't Repeat Yourself
+
+Os módulos podem ser funções ou procedimentos que encapsulam um conjunto específico de
+instruções.
+
+FUNÇÕES 
+-------
+
+Funções são blocos de código projetados para executar uma tarefa específica e podem receber dados
+(parâmetros) e retornar resultados.
+
+Sua importância reside no fato de que ela é REUTILIZÁVEL, podendo ser chamada a qualquer momento 
+durante a escrita do código, sem a necessidade de digitar novamente os detalhes da tarefa e seus
+parâmetros, tornando o código mais limpo e menos propenso a erros.
+
+A definição de uma função é feita através de seu nome, parâmetros e corpo (onde está a lógica de
+programação). Uma função que calcula a soma de dois números tem dois parâmetros (os números a serem
+somados), e retornará o resultado da soma.
+
+Em pseudocódigo: 
+
+função soma(a, b):
+retornar a + b 
+
+Parâmetros são importantes pois são variáveis passadas à função sempre que ela é chamada, fazendo
+com que ela seja capaz de funcionar com diferentes dados, tornando-a mais flexível.
+
+Escopo de variáveis
+-------------------
+
+A prática de modularização tem seus fundamentos na teoria com a utilização de escopo de variáveis.
+Uma variável declarada dentro de uma função é acessível apenas dentro daquela função, o que ajuda
+a prevenir conflitos entre variáveis tornando o programa mais robusto.
+
+Exemplo prático: cálculo de multa por devolução de livro com atraso, sabendo que é cobrado um valor
+                 fixo por dia de R$ 2.00. Se dois livros forem devolvidos em períodos de atraso 
+                 diferentes (5 e 10 dias), a função abaixo poderia ser aproveitada em ambos os 
+                 cenários.
+
+public class Biblioteca {
+
+    public static double calcularMulta(int diasAtraso, double taxaMulta) {
+        return diasAtraso * taxaMulta;
+    }
+
+    public static void main(String[] args) {
+        double multaLivro1 = calcularMulta(5, 2.0);
+        double multaLivro2 = calcularMulta(10, 2.0);
+        System.out.println("Multa do Livro 1: " + multaLivro1);
+        System.out.println("Multa do Livro 2: " + multaLivro2);
+    }
+}
+
+
+Nota: diferença entre 'void' e 'double' na definição de funções.
+
+- void: a função não retorna nenhum valor após o término da execução.
+- double: a função exige o uso do 'return' e é obrigada a retornar um valor float.
+
+
+Apesar de o método 'calcularMulta' ter sido escrito apenas uma vez, ele pode ser reutilizado sempre
+que necessário calcular a multa de qualquer livro, bastando para isso informar os parâmetros do 
+novo cálculo. Adicionalmente, qualquer mudança na regra de cálculo será feita somente uma vez (na
+definição da função), e terá seu efeito aplicado automaticamente a todas as chamadas.
+
+Outro exemplo: um hospital tem aparelhos que medem a temperatura em Celsius e em Fahrenheit, mas 
+precisa que os resultados sejam mostrados sempre em Celsius, e que o valor convertido seja guardado
+num banco de dados.
+
+public class LaboratorioCentral {
+
+    public static void main(String[] args) {
+        
+        double tempFahrenheit = 98.6;
+        
+        // Método de conversão que retorna o valor em Celsius
+        
+        double tempCelsius = converterParaCelsius(tempFahrenheit);
+        System.out.println("A temperatura processada é: " + tempCelsius + " oC");
+        if (tempCelsius > 37.5) {
+            System.out.println("ALERTA: paciente com febre!");
+        }  
+    }
+
+    // Aplicando 'double' no lugar de 'void' dada a promessa de retornar um resultado
+    
+    public static double converterParaCelsius(double fahrenheit) {
+        double resultado = (fahrenheit - 32) * 5 / 9;
+    
+        // Entrega o produto final e encerra o método
+    
+        return resultado;
+    }
+}
+
+
+APROFUNDAMENTO BASEADO EM LITERATURA RECOMENDADA 
+------------------------------------------------
+Anotações feitas após a leitura do capítulo 6 do livro MANZANO, José Augusto Navarro G.; JÚNIOR, 
+Roberto Affonso da Costa. Programação de computadores com Java. 1. ed. Rio de Janeiro: Érica, 2014.
+
+
+Métodos podem ser internos (aqueles que acompanham o compilador da linguagem Java) ou externos 
+(aqueles criados pelo programador para serem reaproveitados sempre que necessário, ainda que em
+outros programas que não o que lhes deu origem).
+
+Exemplo de pacotes de métodos internos (são muitos): 
+
+- java.sql: possui o conjunto de APIs para acesso e processamento das ações de armazenagem de 
+            dados em bancos de dados relacionais que serão controlados com a linguagem Java
+- java.text: possui as classes e as interfaces para o tratamento de textos, datas e números 
+
+Em ambos os casos, os pacotes podem ser chamados no código através do comando 'import'.
+
+Sintaxe geral de um método:
+
+[qualificador] [retorno] [nome(<parâmetros>)] {
+    <corpo do código do método>
+    <return (<valor>)
+}
+
+- Qualificador: define a visibilidade de um atributo ou método.
+  -------------------------------------------------------------
+    1- private: o atributo ou método somente pode ser acessado dentro da classe a que pertence;
+    2- public: o atributo ou método pode ser acessado fora da classe a que pertence por outro 
+                código do programa;
+    3- protected: o atributo ou método somente pode ser acessado pela classe a que pertence ou 
+                    por suas classes-filho que estejam herdando as características de comportamento
+                    da classe-pai;
+    
+    Nota: se não houver a definição do qualificador, o atributo ou método pode ser acessado pela
+          própria classe ou pelas classes que pertencem ao mesmo pacote, e como complementação do 
+          qualificador em uso, utiliza-se uma segunda palavra opcional reservada chamada 'static'
+          cuja finalidade é indicar que o atributo ou método pertence à classe a ele associada, em 
+          vez de a alguma instância particular.
+
+
+- Retorno: representa o tipo de dado que será retornado pelo método.
+  ------------------------------------------------------------------
+    1- byte: retorno de valor numérico inteiro de 1 bit;
+    2- short: retorno de valor numérico inteiro de 32 bits;
+    3- int: retorno de valor numérico inteiro de 16 bits;
+    4- long: retorno de valor numérico inteiro de 64 bits;
+    5- float: retorno de valor numério real de 32 bits;
+    6- double: retorno de valor numérico real de 64 bits;
+    7- char: retorno de uma sequência de caracteres com tamanho de 16 bits;
+    8- boolean: retorno de um valor lógico 'true' ou 'false' com tamanho de 1 bit;
+    
+    Nota: caso o método não tenha um retorno, deve-se usar a palavra reservada 'void'.
+
+
+- Nome: é a definição de um nome de identificação para o método, seguindo os padrões recomendados.
+  ------------------------------------------------------------------------------------------------
+    1- padrão camelCase: começa com letra minúscula e usa iniciais maiúsculas em palavras compostas;
+    2- uso de verbos: o nome deve dizer o que o método faz;
+    3- métodos de consulta: usar 'get' antes de propriedades para leitura, 'set' para alteração, e 
+                            'is' para valores booleanos;
+    4- evitar abreviações: usar palavras inteiras (por exemplo, quantidade ao invés de qtd);
+    5- ser descritivo: nome longo é melhor do que nome curto sem sentido;
+    5- restrições: não usar espaços, nem caracteres especiais, números no início, nem palavras
+                   reservadas do Java (por exemplo 'class', 'public', 'return', etc.).
+
+
+- Parâmetros: é a definição normalmente de variáveis que recebem valores externos enviados pelo 
+              programa que chama um determinado módulo.
+  ---------------------------------------------------------------------------------------------
+    Dentro do módulo, os valores são integralizados e utilizados em seu processamento.
+    1- parâmetros formais: valores representados como parâmetros e integralizados DENTRO do módulo;
+    2- parâmetros reais: valores utilizados no ponto em que o programa chama um determinado módulo.
+    Parâmetros são o mecanismo de comunicação entre o método e o programa que o chama, portanto seu
+    uso é opcional e dependerá de uma série de motivos definidos por quem desenvolve o programa.
+
+- Corpo do código do método: é a parte do método que define seu código de processamento e sua ação.
+---------------------------------------------------------------------------------------------------
+    É no corpo do código do método que os parâmetros reais, quando definidos, são formalizados, 
+    tratados e processados.
+
+- Return (<valor>): só existe em módulos que retornam um valor para fora de sua execução.
+-----------------------------------------------------------------------------------------
+    O valor retornado para fora da execução é representado pelo parâmetro <valor>.
+
+
+USO DE MÉTODOS DEFINIDOS 
+------------------------
+
+Quando um método é chamado, o fluxo de execução do programa é desviado para o método em questão, 
+retornando para o ponto de chamada assim que o método é executado na totalidade.
+
+Exemplo: um programa que executa a parte principal '1', desvia para o método 'sub-rotina', e 
+         volta para o ponto de chamada executando a parte principal '2'.
+
+//* Acionamento do uso de todas as classes de entrada e saída de dados (io)
+import java.io.*;
+
+//* Declaração da classe pública
+class Cap06_Ex01 {
+
+    //* Declaração da função principal
+    public static void main(String[] args) {
+        System.out.println("Execução do programa principal - 1");
+        //* Chamada do método 'SubRotina' 
+        SubRotina();
+        System.out.println("Execução do programa princial - 2");
+    }
+
+    //* Declaração do método SubRotina, após a declaração da função principal 'main'
+    public static void SubRotina() {
+        System.out.println("Execução da sub-rotina (método)");
+    }
+}
+
+
+Ao executar o programa, será apresentado no terminal o seguinte resultado:
+
+Execução do programa principal - 1
+Execução da sub-rotina (método)
+Execução do programa principal - 2
+
+Nota: ambos os métodos ('main' - do programa principal - e 'SubRotina' - criado pelo programador -
+pertencem à mesma classe 'Cap06_Ex01').
+
+---------------------------------------------------------------------------------------------------
+Nota: Verificar a pasta Java_Parte_Pratica
+
+Na atividade 'Calculadora' executada na pasta Faculdade/Estruturas_de_Controle_e_Modularizacao 
+programei o exercício resolvido no livro 'MANZANO, José Augusto Navarro G.; JÚNIOR, Roberto Affonso
+da Costa. Programação de computadores com Java. 1. ed. Rio de Janeiro: Érica, 2014'.
+
+O programa contém comentários detalhados sobre a estruturação da classe e dos métodos, criação das 
+variáveis, passagem de parâmetros, e comandos utilizados.
+---------------------------------------------------------------------------------------------------
+
+
+
+PASSAGEM DE PARÂMETROS 
+----------------------
+
+O uso de passagem de parâmetros em um método tem por finalidade efetuar um ponto de comunicação
+BIDIRECIONAL enter as rotinas que compõem o programa. É muito útil em função do uso maciço de 
+variáveis locais, podendo ocorrer de duas maneiras:
+
+- formal: serão considerados parâmetros formais quando forem declarados por meio de variáveis
+          JUNTAMENTE com a identificação do nome do método;
+- real: serão considerados parâmetros reais quando ocorrer a SUBSTITUIÇÃO dos parâmetros formais
+        durante a utilização do método pelo programa que efetuou a chamada daquele método.
+
+
+Exemplo: cálculo do fatorial de um número qualquer digitado pelo usuário, onde a entrada do valor 
+         a ser calculado ocorra no programa PRINCIPAL e tanto o cálculo quanto a apresentação do 
+         resultado ocorram dentro da SUB-ROTINA.
+
+
+
+import java.io.*;
+import java.util.Scanner;
+
+class CalculoFatorial {
+
+    public static void main(String[] args) {
+
+        byte X;
+        Scanner s = new Scanner(System.in);
+        System.out.println();
+        System.out.println("-----------------------");
+        System.out.println("   Programa Fatorial   ");
+        System.out.println("-----------------------");
+        System.out.println();
+        System.out.print("Entre um valor inteiro (de 0 até 25): ");
+        X = s.nextByte();
+        System.out.println();
+        fatorial (X);
+        System.out.println();
+    }
+
+    public static void fatorial(byte N) {
+        long FAT = 1;
+        if (N == 0) {
+            FAT = 0;
+        }
+        else {
+            for (int I = 1; I <= N; I++) {
+                FAT *= I;
+            }
+        }
+        System.out.println("Fatorial de " + N + " = " + FAT);
+    }
+}
+
+
+Usa-se a passagem de parâmetro quando há necessidade de passar algum conteúdo à sub-rotina chamada.
+Esse conteúdo é copiado a partir da chamada para a sub-rotina. Qualquer modificação na variável
+local da sub-rotina não afetará o valor do parâmetro passado, ou seja, o processamento é executado
+apenas na sub-rotina, de modo que o resultado obtido fica "preso" na área de abrangência da
+sub-rotina chamada. Nem o número passado pelo usuário é sobrescrito pelo contador, nem os valores 
+do contador são sobrescritos pelo valor digitado pelo usuário.
+
+
+PASSAGEM DE PARÂMETRO COM 'RETURN'
+----------------------------------
+
+É possível também passar um parâmetro para fora do método chamado por meio de outro método com 
+retorno. Para cumprir o requisito de sempre retornar uma resposta, uma sub-rotina do tipo FUNÇÃO 
+é usada no final de um comando 'return' com algum conteúdo de resposta associado à função. Uma 
+típica sub-rotina (método) de função tem por finalidade, sempre, retornar um conteúdo como 
+resposta.
+
+Exemplo: cálculo fatorial com entrada de valor e apresentação do resultado no programa principal,
+e cálculo efetuado dentro de um método que devolverá o resultado via 'return':
+
+import java.io.*;
+import java.util.Scanner;
+
+class CalculoFatorialComReturn {
+
+    public static void main(String[] args) {
+
+        byte X;
+        long R;
+        Scanner s = new Scanner(System.in);
+
+        System.out.println();
+        System.out.println("-----------------------");
+        System.out.println("   Programa Fatorial   ");
+        System.out.println("-----------------------");
+        System.out.println();
+        System.out.print("Digite um valor inteiro (de 0 a 25): ");
+        X = s.nextByte();
+        System.out.println();
+        R = fatorial(X);
+        System.out.println();
+        System.out.println("Fatoral de " + X + " = " + R);
+    }
+
+    public static long fatorial(byte N) {
+        long FAT = 1;
+        if (N == 0) {
+            FAT = 0;
+        }
+        else {
+            for (int I = 1; I <= N; I++) {
+                FAT *= I;
+            }
+        }
+        return (FAT);
+    }
+}
+
+
+O método 'fatorial()', por meio da instrução 'return FAT', retorna o conteúdo final da variável
+'FAT', devolvendo-a ao programa principal que chamou a função 'fatorial'. Esse recurso devolve um
+valor de retorno. Se houver mais valores a serem retornados, é necessário utilizar passagem de 
+parâmetro por referência.
+
+
+CLASSE 'MATH'
+-------------
+
+A classe 'Math' possui uma série de funções para auxiliar diversas operações matemáticas. Possui 
+duas constantes matemáticas:
+
+- 'Math.PI': com o valor de Pi (3.14159265358979323846);
+- 'Math.E': para cálculos de logaritmos naturais com valor de 2.7182818284590452354.
+
+Adicionalmente, possui um conjunto de 22 métodos matemáticos para cálculos trigonométricos,
+exponenciais, logarítmicos, entre outros. Alguns exemplos:
+
+import java.io.*;
+
+class ModuloMatematica {
+    public static void main(String[] args) {
+        System.out.println(Math.acos(-1));                      // 3.141592653589793
+        System.out.println(Math.asin(-1));                      // -1.5707963267948966
+        System.out.println(Math.atan(1));                       // 0.7853981633974483
+        System.out.println(Math.sin(1));                        // 0.8414709848078965
+        System.out.println(Math.tan(4));                        // 1.1578212823495777
+        System.out.println(Math.pow(2,3));                      // 8.0
+        System.out.println(Math.sqrt(9.0));                     // 3.0
+        System.out.println(Math.exp(1));                        // 2.7182818284590455
+        System.out.println(Math.log(3));                        // 1.0986122886681096
+        System.out.println(Math.abs(-9));                       // 9
+        System.out.println(Math.ceil(2.03));                    // 3.0
+        System.out.println(Math.floor(2.03));                   // 2.0
+        System.out.println(Math.max(10,3));                     // 10
+        System.out.println(Math.min(10,3));                     // 3
+        System.out.println(Math.rint(18.7));                    // 19.0
+        System.out.println(Math.round(5.8));                    // 6        
+    }
+}
+
+         
+MÉTODOS PARA CADEIAS DE CARACTERES 
+----------------------------------
+
+Cadeias de caracteres (ou strings) são sequências alfanuméricas delimitadas como caracteres entre 
+aspas. Para o tratamento de strings, são usadas propriedades e métodos associados a um objeto 
+(variável) do TIPO 'string'.
+
+O mais comum é utilizar:
+
+- a propriedade 'Lenght': apresenta o tamanho da string;
+- o método 'ToLower()': apresenta a string em minúsculas;
+- o método 'ToUpper()': apresenta a string em maiúsculas;
+- o método 'Substring(): extrai partes de um string usando dois parâmetros, sendo o primeiro a 
+                         posição do string a ser extraída, e o segundo a quantidade de caracteres 
+                         a ser extraída.
+
+Alguns exemplos:
+
+import java.io.*;
+
+class CadeiaDeCaracteres {
+
+    public static void main(String[] args) {
+
+        String TEXTO = "Computador";
+
+        System.out.println();
+        System.out.println(TEXTO.length());             // 10
+        System.out.println(TEXTO.toLowerCase());        // computador
+        System.out.println(TEXTO.toUpperCase());        // COMPUTADOR 
+        System.out.println(TEXTO.substring(0, 3));      // Com 
+        System.out.println(TEXTO.substring(3, 7));      // puta 
+        System.out.println(TEXTO.substring(7, 10));     // dor 
+    }
+}
+
+
+
+
+
+
