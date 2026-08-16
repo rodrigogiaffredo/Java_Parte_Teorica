@@ -433,7 +433,94 @@ class CadeiaDeCaracteres {
 }
 
 
+-------------------------
+DECOMPOSIÇÃO DE PROBLEMAS
+-------------------------
 
+Decomposição é a capacidade de dividir um problema complexo em vários problemas menores e mais 
+simples, permitindo que cada parte do problema seja compreendida, implementada e testada de forma 
+individual. Ao final, basta integrar as partes para obter a solução completa.
+
+
+----------------------
+REUTILIZAÇÃO DE CÓDIGO
+----------------------
+
+Muitas vezes, as pequenas tarefas implementadas e testadas separadamente acabam sendo úteis em 
+diferentes partes do sistema, bastando para isso reutilizar o código já escrito, ao invés de 
+escrever a mesma lógica repetidas vezes.
+
+Vale destacar que reutilizar código não significa apenas copiar e colar trechos de um programa.
+Pelo contrário, a ideia é utilizar uma única implementação para atender diferentes situações, 
+alterando apenas os dados de entrada quando necessário.
+
+
+Exemplo de aplicação dos princípios de decomposição de problemas e reutilização de código:
+
+- Objetivo: desenvolver um sistema acadêmico responsável por calcular a situação final dos alunos.
+- Etapas principais (decomposição do problema):
+    1- calcular a média das notas;
+    2- verificar a situação do estudante;
+    3- apresentar o resultado ao usuário.
+
+Cada etapa representa uma responsabilidade específica do sistema, portanto inicialmente posso 
+criar uma função responsável apenas pelo cálculo da média:
+
+public static double calcularMedia(double nota1, double nota2, double nota3) {
+    return (nota1 + nota2 + nota3) / 3;
+}
+
+Essa função recebe três notas, realiza o cálculo da média aritmética e retorna o resultado.
+
+A grande vantagem é que ela pode ser reutilizada em qualquer parte do sistema sempre que for 
+necessário calcular a média de um estudante.
+
+Em seguida, posso criar outra função responsável apenas por verificar a situação do aluno:
+
+public static string verificarAprovacao(double nota1, double nota2, double nota3) {
+    double media = calcularMedia(nota1, nota2, nota3);
+    if (media >= 7.0) {
+        return "Aprovado";
+    }
+    else {
+        return "Reprovado";
+    }
+}
+
+
+Essa é uma das maiores vantagens da modularização: cada método possui uma única responsabilidade.
+
+Caso, futuramente, a forma de calcular a média seja alterada — por exemplo, passando a utilizar 
+pesos diferentes para cada avaliação — a modificação será realizada apenas na função 
+'calcularMedia()'. O restante do sistema continuará funcionando normalmente.
+
+Por fim, posso utilizar essas funções dentro do programa principal:
+
+public class SistemaAcademico {
+    public static double calcularMedia(double nota1, double nota2, double nota3) {
+        return (nota1 + nota2 + nota3) / 3;
+    }
+    public static string verificarAprovacao(double nota1, double nota2, double nota3) {
+        double media = calcularMedia(nota1, nota2, nota3);
+        if (media >= 7.0) {
+            return "Aprovado";
+        }
+        else {
+            return "Reprovado";
+        }
+    public static void main (String[] args) {
+        double nota1 = 8.0;
+        double nota2 = 7.5;
+        double nota3 = 9.0;
+        System.out.println("Média: " + calcularMedia(nota1, nota2, nota3));
+        System.out.println("Situação: " + verificarAprovacao(nota1, nota2, nota3));
+    }
+    }
+}
+
+
+Pelo fato de cada função possuir uma responsabilidade bem definida, o código se torna mais limpo, 
+reutilizável e mais fácil de manter.
 
 
 
