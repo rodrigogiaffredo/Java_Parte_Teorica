@@ -1,0 +1,84 @@
+
+Profa. Giuliana Bezerra
+
+---------
+VARIÁVEIS
+---------
+
+Variáveis são containers de dados. Ficam armazenadas na JVM para a correta execução do programa, 
+e quando necessário são chamadas pelo seu IDENTIFICADOR (o nome único que damos a ela). 
+
+Tipos de Variáveis
+------------------
+
+Existem containers diferentes para cada tipo de variável, e o Java é uma linguagem chamada de 
+fortemente tipada (o tipo precisa estar explícito na declaração da variável e não muda após a 
+criação, pois o container criado pela JVM se baseia nesse tipo).
+
+Tipos primitivos:
+
+- int: Guarda números inteiros normais (ex: 10, -45);
+- double: Guarda números com ponto decimal de alta precisão (ex: 3.14, 0.5);
+- boolean: Guarda apenas true (verdadeiro) ou false (falso);
+- char: Guarda uma única letra ou símbolo (ex: 'a', 'Z') entre aspas simples;
+- byte: Guarda números inteiros muito pequenos de -128 a 127;
+- short: Guarda números inteiros curtos de -32.768 a 32.767;
+- long: Guarda números inteiros muito grandes (ex: 150000L);
+- float: Guarda números decimais de precisão simples (ex: 5.75f).
+
+Tipos de referências e classes:
+
+- String: Guarda textos e frases completas (ex: "Olá, mundo");
+- Arrays: Guardam listas de vários valores do mesmo tipo (ex: int[] idades);
+- Objetos/Classes: Instâncias criadas a partir de moldes personalizados.
+
+
+Sintaxe genérica
+----------------
+
+Exite uma sintaxe definida para a criação e para a utilização de variáveis em Java.
+
+- somente declaração: <tipo>identificador;
+- declaração + atribuição de valor: <tipo>identificador = valor;
+
+Exemplo: variável do tipo 'string' com identificador 'cafe' armazenando o valor 'Expresso'.
+
+String cafe = "Expresso";
+
+
+
+Padrão de nomenclatura
+----------------------
+
+Os nomes devem ser significativos, ou seja, ao lê-los devemos entender imediatamente o valor que
+armazenam.
+
+Na hora de escrever, usamos o padrão camelCase: se houver mais de uma palavra no nome da variável, 
+a primeira letra da primeira palavra é minúscula, e as primeiras letras das demais palavras é
+maiúscula. Exemplo: variável do tipo 'string' com identificador 'tipoDeCafe' armazenando o valor 
+'Expresso'.
+
+String tipoDeCafe = "Expresso";
+
+Nota: a JVM não deixa de executar o código caso não sigamos a convenção, trata-se de uma convenção,
+      e não de uma limitação técnica.
+
+
+
+Escopo das variáveis
+--------------------
+
+O escopo muda de acordo com o local onde a variável é declarada no código:
+
+- locais: declaradas e usadas dentro do mesmo bloco de comando;
+- de instância: declaradas dentro da classe, mas fora de métodos; pertencem a cada objeto criado.
+- estáticas (static): pertencem à classe inteira e não a um objeto específico.
+
+ 
+
+
+
+
+
+
+
