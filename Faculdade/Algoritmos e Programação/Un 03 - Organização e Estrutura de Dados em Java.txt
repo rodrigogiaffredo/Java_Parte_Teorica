@@ -1,0 +1,303 @@
+
+----------------------------------------
+ORGANIZAÇÃO E ESTRUTURA DE DADOS EM JAVA
+----------------------------------------
+
+Variáveis isoladas não são suficientes para organizar grandes conjuntos de informações.
+
+À medida que um sistema cresce, torna-se necessário buscar formas mais organizadas de armazenar, 
+acessar e modificar informações. É nesse contexto que surgem as estruturas de dados, que permitem
+agrupar valores relacionados e realizar operações de maneira mais eficiente.
+
+Por exemplo, imaginando que um programa precise armazenar as notas de mil estudantes; tentar criar
+variáveis tornaria o código trabalhoso, difícil de compreender, modificar e manter.
+
+double nota1;
+double nota2;
+double nota3;
+double nota4;
+// ...
+double nota1000;
+
+Com uma estrutura adequada ('array'), as mesmas informações podem ser organizadas em uma única
+variável:
+
+double[] notas = new double[1000];
+
+Essa pequena alteração modifica completamente a maneira como os dados podem ser armazenados e 
+processados.
+
+Na programação:
+
+- Um ARRAY organiza elementos em posições fixas e numeradas;
+- Uma MATRIZ organiza elementos de forma bidimensional, em linhas e colunas;
+- Uma LISTA mantém uma sequência de elementos que pode crescer conforme necessário;
+- Um CONJUNTO evita elementos repetidos;
+- Um MAPA relaciona uma chave única a um valor específico;
+- Uma FILA organiza elementos conforme uma ordem de atendimento.
+
+O que são dados?
+----------------
+
+Um dado é uma representação de um valor, fato, medida, símbolo ou descrição que pode ser 
+armazenada e processada por um programa.
+
+Alguns exemplos são: 42,  8.5,  "Suco de laranja", true,  'A'.
+
+Cada dado possui um significado que depende do contexto.
+
+O número 42 pode representar uma quantidade de produtos, a idade de uma pessoa, o código de um 
+pedido ou a identificação de uma mesa. Portanto, o valor isolado não explica necessariamente aquilo
+que ele representa.
+
+Quando o dado é interpretado dentro de um contexto, ele produz informação. Exemplo:
+
+int quantidade = 42;
+
+O nome da variável ajuda a informar que o valor 42 representa uma quantidade. Um nome ainda mais 
+específico poderia melhorar essa compreensão:
+
+int quantidadeDePedidos = 42;
+
+Essa escolha não altera o valor armazenado, mas melhora a legibilidade do programa.
+
+
+O que é um tipo de dado?
+------------------------
+
+Um tipo de dado define quais VALORES podem ser armazenados, quais OPERAÇÕES podem ser realizadas, 
+com o valor será INTERPRETADO pelo programa, e como o compilador VERIFICARÁ determinadas operações.
+
+Alguns tipos PRIMITIVOS em Java:
+
+- int                   25                  Números inteiros
+- double             19.90                  Números com parte decimal
+- boolean             true                  Valores lógicos
+- char                 'A'                  Um único caractere
+- long             150000L                  Números inteiros maiores
+- float               3.5F                  Números decimais com precisão simples
+
+
+O que é uma estrutura de dados?
+-------------------------------
+
+Uma estrutura de dados é uma forma de organizar dados em memória para permitir que determinadas 
+operações sejam realizadas. Essas operações podem incluir armazenar, acessar, percorrer, buscar, 
+inserir, alterar, remover, ordenar, agrupar e contar.
+
+Exemplo:
+
+String[] produtos = {"Café", "Suco", "Sanduíche"};
+
+for (String produto : produtos) {
+    System.out.println(produto);
+}
+
+Pelo fato de os 3 produtos pertencerem a uma mesma estrutura, é possível percorrê-los com uma
+repetição. Portanto, a estrutura não apenas armazena valores, mas cria uma forma de trabalhar com 
+eles.
+
+
+Características das estruturas de dados
+---------------------------------------
+
+- estrutura de dados HOMOGÊNEA: armazena elementos de um mesmo TIPO. Um 'array' de números inteiros
+                                armazena apenas valores compatíveis com 'int':
+
+                                int[] quantidades = {4, 2, 7, 1};
+
+                                Uma lista de nomes armazena objetos do tipo 'String':
+
+                                ArrayList<String> nomes = new ArrayList<>();
+
+A homogeneidade facilita a execução da mesma operação sobre todos os elementos. Exemplo:
+
+int soma = 0;
+for(int quantidade : quantidades) {
+    soma += quantidade;
+}
+
+Como todos os valores são inteiros, o programa pode somá-los sem precisar descobrir o tipo de cada 
+posição.
+
+- estrutura de dados HETEROGÊNEA: reúne informações de tipos diferentes que definem uma mesma
+                                  entidade. Por exemplo, um pedido pode conter:
+                                  - um número inteiro para a mesa;
+                                  - um texto para o produto;
+                                  - um número decimal para o preço;
+                                  - um valor lógico para indicar o pagamento.
+
+Em Java, esse agrupamento costuma ser representado por uma CLASSE:
+
+public class Pedido {
+    int numeroMesa;
+    String produto;
+    double preco;
+    boolean pago;
+}
+
+A classe 'Pedido' não representa apenas um valor. Ela reúne diferentes ATRIBUTOS relacionados a um 
+mesmo CONCEITO.
+
+
+Estruturas de tamanho FIXO e VARIÁVEL 
+-------------------------------------
+
+Enquanto algumas estruturas têm uma quantidade de posições definida desde sua criação, outras 
+permitem que elementos sejam adicionados ou removidos conforme a necessidade da aplicação.
+
+- estruturas de tamanho FIXO: um 'array' possui um tamanho definido no momento de sua criação.
+                              Exemplo:
+
+                              String[] pedidos = new String[10];
+
+                              Esse 'array' possui dez posições; depois de criado, seu comprimento 
+                              não pode ser alterado, o que não significa que os valores sejam 
+                              imutáveis, já que os elementos podem ser substituídos se necessário:
+
+                              pedidos[0] = "Café";
+                              pedidos[0] = "Suco";
+
+                              O que permanece fixo é a quantidade de posições.
+
+Um 'array' é adequado quando:
+
+- a quantidade de elementos é conhecida;
+- o limite dificilmente será alterado;
+- o acesso por posição é importante;
+- a simplicidade e a previsibilidade são desejadas.
+
+
+- estruturas de tamanho VARIÁVEL (coleção): uma coleção como 'ArrayList' pode aumentar ou diminuir 
+                                            durante sua execução. 
+                                            Exemplo:
+
+                                            ArrayLyst<String> pedidos = new ArrayList<>();
+                                            pedidos.add("Café");
+                                            pedidos.add("Suco");
+                                            pedidos.add("Sanduíche");
+
+                                            Um elemento também pode ser removido.
+                                            Exemplo:
+
+                                            pedidos.remove("Suco");
+
+Uma lista é adequada quando:
+
+- a quantidade de elementos pode variar;
+- inserções e remoções fazem parte do problema;
+- o programa precisa controlar o tamanho de forma dinâmica;
+- o limite máximo não é conhecido antecipadamente.
+
+
+Estruturas SEQUENCIAIS e ASSOCIATIVAS
+-------------------------------------
+
+Além de conhecer o tipo de informação armazenada e a forma como o tamanho da estrutura é definido,
+é preciso compreender como os elementos são ORGANIZADOS e ACESSADOS.
+
+Em algumas estruturas, cada elemento ocupa uma posição definida em uma sequência. Em outras, os 
+dados são recuperados por meio de uma chave de identificação, estabelecendo uma associação entre 
+chave e valor.
+
+- organização SEQUENCIAL: os dados aparecem numa determinada ordem e, frequentemente, pode ser 
+                          acessados por uma posição.
+                          Exemplo:
+
+                          String[] produtos = {"Café", "Suco", "Bolo"};
+
+Nesse caso:
+- produtos[0] contém Café
+- produtos[1] contém Suco
+- produtos[2] contém Bolo
+
+
+- organização ASSOCIATIVA: os dados são localizados por meio de uma chave.
+                           Exemplo:
+
+                           HashMap<Integer, String> produtosPorCodigo = newHashMap<>();
+                           produtosPorCodigo.put(101, "Café");
+                           produtosPorCodigo.put(205, "Suco");
+                           produtosPorCodigo.put(310, "Bolo");
+
+                           O produto pode ser localizado pelo seu código:
+
+                           String produto = produtosPorCodigo.get(205);
+
+Nesse exemplo, o programa não procura o produto pela posição zero, um ou dois. Ele utiliza
+a chave 205.
+
+
+Operações fundamentais
+----------------------
+
+Na prática, os programas realizam constantemente ações como inserir novos elementos, localizar 
+informações, atualizar valores, remover registros e percorrer os dados armazenados. Essas ações 
+são conhecidas como operações fundamentais das estruturas de dados e estão presentes em 
+praticamente todas as implementações.
+
+
+
+Escolhendo estruturas
+---------------------
+
+Cada estrutura apresenta vantagens e limitações para as chamadas operações fundamentais. Por isso,
+escolher uma estrutura exige identificar quais operações serão realizadas com maior frequência. 
+Diferentes necessidades exigem diferentes formas de organização dos dados.
+
+Exemplos:
+
+            Necessidade                   Escolha inicial                 Motivo
+--------------------------------------------------------------------------------------------------
+Armazenar sete temperaturas                     Array               Quantidade fixa e conhecida
+Organizar notas por estudante e disciplina      Matriz              Dados formam linhas e colunas
+Manter uma lista variável de pedidos            ArrayList           Aumenta ou diminui
+Evitar códigos repetidos                        HashSet             Controle de unicidade
+Localizar um produto pelo código                HashMap             Busca por chave
+Atender clientes pela ordem de chegada          Fila                Ordem FIFO de entrada e saída
+
+
+Visão inicial em Java
+---------------------
+
+Exemplo com 3 formas de representar dados relacionados.
+
+1- Dados em variáveis separadas:
+
+String produto1 = "Café";
+String produto2 = "Suco";
+String produto3 = "Bolo";
+
+2- Dados em um 'array':
+
+String[] produtos = {"Café", "Suco", "Bolo"};
+
+3- Dados em uma lista:
+
+ArrayList<String> produtos = new ArrayList<>();
+produtos.add("Café");
+produtos.add("Suco");
+produtos.add("Bolo");
+
+Nota: tanto a 'array' quanto a lista permitem percorrer os elementos.
+
+      for (String produto: produtos) {
+        System.out.println(produto);
+      }
+
+      Porém, suas características são diferentes: enquanto 'array' tem comprimento fixo, a lista
+      pode crescer ou diminuir.
+
+
+Qual estrutura de dados escolher
+--------------------------------
+
+As decisões em torno da estrutura de dados de um programa devem levar em conta:
+
+- o formato dos dados;
+- a quantidade de elementos;
+- a possibilidade de crescimento;
+- a necessidade de manter ordem;
+- a existência ou não de duplicidades;
+- a frequência das operações;
+- a forma de acesso.
