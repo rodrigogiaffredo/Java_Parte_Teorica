@@ -1,0 +1,49 @@
+
+Profa. Giuliana Bezerra
+
+-------
+MÉTODOS
+-------
+
+Métodos são blocos de comando que dão vida aos progragamas. Em Java, métodos equivalem às funções 
+de outras linguagens; é ali que a lógica do programa está contida.
+
+Métodos exercem funções e definem comportamentos e instruções para o programa em Java.
+
+Sintaxe geral
+-------------
+
+<tipo de retorno do método> identificador(<tipo> parâmetro) {
+    // bloco de comandos
+    return <algo do mesmo tipo do retorno do método>;
+}
+
+Pelo fato de o Java ser uma linguagem fortemente tipada, o primeiro detalhe a ser definido sobre o 
+método é o seu TIPO.
+
+Nota: caso o método retorne algo ao final de sua execução, o valor de retorno segue exatamente o 
+      mesmo tipo definido para o método; caso contrário, o tipo do método é vazio ('void').
+
+Exemplo: programar a função soneca de um despertador.
+
+String despertar() {
+    return "ACORDA!";
+}
+
+Normalmente, são usados verbos para os nomes dos métodos, já que no programa eles representam 
+justamente as ações que ele executará; também seguimos a convenção do camelCase para nomear os 
+métodos. Exemplo:
+
+void despertarParaTrabalhar() {
+    System.out.println("ACORDA!");
+}
+
+Nota: tipo 'void' pois esse método não retorna ('return') nada, apenas imprime mensagem na tela.
+
+ATENÇÃO para as anotações no arquivo com a aula prática, pois elas complementam a aula.
+
+
+
+
+
+
