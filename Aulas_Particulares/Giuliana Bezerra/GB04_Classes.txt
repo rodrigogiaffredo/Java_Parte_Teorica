@@ -1,0 +1,88 @@
+
+
+Profa. Giuliana Bezerra
+
+-------
+CLASSES
+-------
+
+Classes são estruturas que representam conceitos do mundo real. Em Java as classes são as bases dos
+programas. Declaro primeiro uma classe, e depois escrevo a lógica toda dentro dela, por isso se diz 
+que Java é uma linguagem orientada a objetos - por representar situações do mundo real através do 
+uso de classes.
+
+Parte-se da identificação dos objetos, e no momento de programar, crio as classes que os representam.
+
+Classes são blueprints (pense em plantas ou receitas) para criar objetos.
+
+A JVM lê os blueprints para construir os objetos que serão usados nos programas Java.
+
+Diagrama de classes para criação de objetos / instâncias
+--------------------------------------------------------
+-----------
+| Gato    |     Nome da classe
+|----------
+| raca    |
+| nome    |     Atributos da classe
+| tamanho |
+|----------
+| miar()  |     Método da classe
+-----------
+
+ATRIBUTOS são características, e MÉTODOS são comportamentos.
+
+A partir dessa classe, crio objetos. Por exemplo, posso criar 2 gatos com raças, nomes, tamanhos e 
+miados diferentes. Ambos são gatos, mas cada um tem suas próprias características.
+
+No exemplo, a classe Gatos tem duas instâncias (objetos) distintos, por isso é comum usar o verbo
+instanciar, que significa criar um objeto a partir de uma classe.
+
+Sintaxe para criação de classes
+-------------------------------
+
+class IdentificadorDaClasse {
+    <bloco de código com atributos e métodos da classe>
+};
+
+O identificador da classe é usado para referenciar os objetos dessa classe, e por convenção seu nome 
+segue o Pascal Case (as iniciais de cada palavra, inclusive da primeira, são maiúsculas).
+
+
+- O que um objeto SABE: atributos, variáveis de instância pois são definidas dentro da classe, e são 
+                        acessíveis para todos os métodos declarados na classe;
+
+- O que um objeto FAZ: métodos.
+
+Exemplo:
+
+// declarando a classe
+class Gato {
+
+    // declarando os atributos da classe
+    String raca;
+    String nome;
+
+    // declarando o método da classe
+    void miar() {
+        System.out.println("Miau!");
+    }
+}
+
+Os programas em Java sempre são construídos assim: definindo classes, seus atributos e seus métodos, 
+pois elas serão utilizadas para criar os objetos que representam o mundo real no programa.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

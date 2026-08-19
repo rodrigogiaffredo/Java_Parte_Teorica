@@ -40,7 +40,7 @@ void despertarParaTrabalhar() {
 
 Nota: tipo 'void' pois esse método não retorna ('return') nada, apenas imprime mensagem na tela.
 
-ATENÇÃO para as anotações no arquivo com a aula prática, pois elas complementam a aula.
+ATENÇÃO para as anotações no arquivo com a aula prática, pois elas complementam este documento.
 
 
 
