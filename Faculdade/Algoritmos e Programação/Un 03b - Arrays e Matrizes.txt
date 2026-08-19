@@ -1,0 +1,482 @@
+
+------------------------------------------------------------
+ARRAYS UNIDIMENSIONAIS E ARRAYS MULTIDIMENSIONAIS (MATRIZES)
+------------------------------------------------------------
+
+Estruturas são utilizadas quando um programa precisa armazenar vários valores do mesmo tipo, 
+mantendo uma organização baseada em posições.
+
+Em Java, os arrays permitem agrupar vários dados do mesmo tipo em uma única estrutura, utilizando 
+posições identificadas por índices. Essa organização facilita a localização e o processamento das 
+informações.
+
+Exemplo prático de criação da 'array' 'produtos':
+
+Em Java, a contagem de posições sempre começa pelo número zero, portanto em um 'array' de 5 
+elementos, a última posição acessível é a de número 4.
+
+                                                                         Último Índice = length - 1
+Índices           0                   1               2                 3                 4
+Ítem            Café                Suco            Bolo            Sanduíche          Salada
+
+Acessando o índice produtos[2] o sistema retornaria 'Bolo'.
+
+Porém, nem todos os problemas possuem apenas uma dimensão de informação. Em muitas situações, os 
+dados precisam ser organizados considerando mais de uma característica, como linhas e colunas.
+
+É nesse contexto que surgem as matrizes, estruturas capazes de representar dados distribuídos em 
+duas ou mais dimensões.
+
+Exemplo prático da criação de uma matriz de vendas organizada em cinco linhas e quatro colunas, 
+onde as linhas representam os dias úteis, e as  colunas representam os produtos.
+
+
+-----------------------------------------------------------------------------------------
+                        |                          Índices (Colunas)  
+                        |                         
+Índices (Linhas)        |   Café[0]            Suco[1]        Bolo[2]        Sanduíche[3]
+-----------------------------------------------------------------------------------------
+Segunda-feira[0]        |
+Terça-feira[1]          |
+Quarta-feira[2]         |
+Quinta-feira[3]         |
+Sexta-feira[4]          |
+------------------------------------------------------------------------------------------
+
+Índices baseados em zero: em Java, a contagem de linhas e colunas sempre inicia no número zero.
+
+Dimensões da matriz (5x4): as 5 linhas representam os dias úteis; as 4 colunas representam os 
+                           produtos vendidos.
+
+vendas[3][2]: o primeiro número [3] indica a linha, o segundo [2] indica a coluna.
+
+O que o dado representa? Localiza a quantidade de bolos vendidos na quinta-feira.
+
+-----------------
+CONCEITO DE ARRAY
+-----------------
+
+Um 'array' é uma estrutura que armazena uma quantidade FIXA de elementos de um MESMO TIPO; trata-se 
+de um objeto criado dinamicamente.
+
+Características principais de um array:
+
+- possui um tipo de elemento;
+- possui um comprimento fixo;
+- utiliza índices numéricos;
+- começa no índice zero;
+- permite acesso direto a uma posição;
+- pode armazenar valores primitivos ou referências;
+- pode possuir uma ou várias dimensões.
+
+
+DECLARAÇÃO de um ARRAY
+----------------------
+
+A declaração informa que uma variável poderá referenciar um 'array':
+
+int[] quantidades;
+
+A forma recomendada coloca os colchetes depois do tipo:
+
+double[] preços;
+String[] produtos;
+boolean[] pagamentos;
+
+Também existe a sintaxe:
+
+int quantidades[];
+
+Entretanto, a primeira forma (int[] quantidades) é preferível porque evidencia que o tipo da 
+variável é int[].
+
+A declaração sozinha não cria o 'array'. Para criar posições, utilizo 'new':
+
+quantidades = new int[5];
+
+É possível também declarar e criar um 'array' na mesma instrução:
+
+int[] quantidades = new int[5];
+
+
+Valores-PADRÃO
+--------------
+
+Quando um array é instanciado com new, o Java atribui automaticamente valores-padrão aos seus 
+elementos.
+
+
+TIPO                        Valor-padrão
+----------------------------------------
+int                         0
+double                      0.0
+boolean                     false
+char                        Caractere nulo
+Tipos de referência         null 
+
+
+Exemplo de programa sem valores definidos, que exibe somente os valores-padrão:
+
+int[] quantidades = new int[3];
+System.out.printl(quantidades[0]);
+System.out.println(quantidades[1]);
+System.out.println(quantidades[2]);
+
+A saída será:
+
+0
+0
+0
+
+
+INICIALIZAÇÃO de um ARRAY
+-------------------------
+
+Inicialização por posição:
+
+String[] produtos = new String[3];
+produtos[0] = "Café";
+produtos[1] = "Suco";
+produtos[2] = "Bolo";
+
+
+Inicialização com valores conhecidos:
+
+String[] produtos = {
+    "Café";
+    "Suco";
+    "Bolo";
+};
+
+
+Índices
+-------
+
+O primeiro índice é zero. Para um 'array' de comprimento cinco, os índices serão 0, 1, 2, 3 e 4.
+
+Em Java:
+
+int ultimoIndice = produtos.length -1;
+
+O primeiro elemento é acessado por 'produtos[0]' e o último por 'produtos[produtos.length - 1].
+
+
+ACESSO e ALTERAÇÃO
+------------------
+
+Acesso: String primeiroProduto = produtos[0];
+
+Alteração: produtos[1] = "Suco de laranja";
+
+O código altera o conteúdo da posição 1, mas não altera o tamanho da 'array'.
+
+
+PERCURSO com FOR 
+----------------
+
+O percurso tradicional utiliza um índice:
+
+for(int i = 0; i < produtos.length; i++) {
+    System.out.println(produtos[i]);
+}
+
+
+Detalhando o percurso:
+
+int i = 0; diz que a variável começa no primeiro índice.
+
+i < produtos.length; diz que a repetição continua enquanto o índice for menor que o comprimento.
+
+i++; diz que o índice avança uma posição.
+
+Nota: a condição não deve utilizar '<=' pois tentaria acessar uma posição inexistente.
+
+
+Alteração com FOR-EACH 
+----------------------
+
+Se usar o código abaixo, o 'array' original não será modificado. A variável 'valor' receberá uma 
+cópia de cada valor primitivo:
+
+int[]valores = {10, 20, 30};
+for(int valor:valores) {
+    valor = valor * 2;
+}
+
+Para alterar os valores nas posições ocupadas no 'array', devo usar os índices:
+
+for(int i = 0; i < valores.length; i++) {
+    valores[i] = valores[i] * 2;
+}
+
+Após a execução, o resultado será 20, 40, 60.
+
+
+Localização do MAIOR valor
+--------------------------
+
+int[] vendas = {35, 18, 42, 27, 31};
+
+// Uso o truque de inicialmente atribuir a posição [0] como o maior valor 
+
+int maior = vendas[0];
+
+// Depois percorro os demais valores a partir da posição [1] e vou substituindo até que sobre o 
+// realmente maior 
+
+for(int i = 1; i < vendas.length; i++) {
+    if(vendas[i] > maior) {
+        maior = vendas[i];
+    }
+}
+System.out.println("Maior venda: " + maior);
+
+
+Localização do MAIOR valor e sua POSIÇÃO 
+----------------------------------------
+
+// Mesmo truque usado anteriormente, agora também para a posição 
+
+int maior = vendas[0];
+int posicaoMaior = 0;
+
+for(int i = 1; i < vendas.length; i++) {
+    if(vendas[i] > maior) {
+        maior = vendas[i];
+        posicaoMaior = i;
+    }
+}
+
+
+Utilização da CLASSE ARRAYS 
+---------------------------
+
+A classe 'java.util.Arrays' oferece métodos para manipulação de 'arrays', incluindo ordenação 
+e busca.
+
+- Importando a classe que disponibiliza métodos para manipular 'arrays':
+
+  import java.util.Arrays;
+
+- Exibindo o conteúdo do 'array' de forma legível:
+
+  int[] valores = {8, 2, 5, 1};
+  System.out.println(Arrays.toString(valores));
+
+- Ordenando os elementos do 'array' em ordem crescente:
+
+  Arrays.sort(valores);
+  // O conteúdo passa a ser: [1, 2, 5, 8]
+
+- Buscando um elemento no 'array' ORDENADO  e retornando sua posição (busca binária):
+
+  int posicao = Arrays.binarySearch(valores, 5);
+
+  Nota: a busca binária só funciona corretamente em 'arrays' ordenados:
+
+  Arrays.sort(valores);
+  int posicao = Arrays.binarySearch(valores, 5);
+
+- Criando uma cópia do 'array' original:
+
+  int[] copia = Arrays.copyOf(valores, valores.length);
+
+- Preenchendo todas as posição do 'array' com um valor específico:
+
+  int[] estoque = new int[5];
+  Arrays.fill(estoque, 10);
+
+
+INSERÇÃO em um ARRAY
+--------------------
+
+Um array não oferece um método add(). Quando existe espaço livre, uma inserção pode ser simulada
+com o deslocamento dos elementos.
+
+String[] produtos = new String[5];
+int quantidade = 3;
+produtos[0] = "Café";
+produtos[1] = "Suco";
+produtos[2] = "Bolo";
+
+- Para inserir 'Salada' na posição[1]:
+
+int posicaoInsercao = 1;
+if(quantidade < produtos.length) {
+    for(int i = quantidade; i > posicaoInsercao; i--) {
+        produtos[i] = produtos[i-1];
+    }
+    
+    produtos[posicaoInsercao] = "Salada";
+    quantidade++;
+}
+
+O 'array' ficará logicamente organizado assim: Café, Salada, Suco, Bolo.
+
+Nota: a variável 'quantidade' indica quantas posições estão efetivamente ocupadas.
+
+
+REMOÇÃO em um ARRAY
+-------------------
+
+Para remover uma posição, os elementos posteriores pode ser deslocados para a esquerda.
+
+int posicaoRemocao = 1;
+for(int i = posicaoRemocao; i < quantidade - 1; i++) {
+    produtos[i] = produtos[i + 1];
+}
+
+produtos[quantidade - 1] = null;
+quantidade--;
+
+Esse processo mostra uma limitação dos 'arrays': inserções e remoções podem exigir deslocamentos e 
+controle manual.
+
+Os 'arrays' são adequados quando os dados podem ser organizados em uma única sequência de posições.
+Porém, quando as informações precisam ser relacionadas em linhas e colunas, uma estrutura 
+unidimensional deixa de ser suficiente.
+
+Nesse contexto, surgem as matrizes, que ampliam a capacidade dos arrays ao permitir a representação
+de dados em duas ou mais dimensões.
+
+
+------------------
+CONCEITO DE MATRIZ 
+------------------
+
+Em Java, uma matriz é representada por um array cujos elementos também são arrays.
+
+Uma matriz BIDIMENSIONAL utiliza dois índices:
+
+int [][] vendas;
+
+O primeiro índice normalmente representa LINHA, e o segundo representa COLUNA:
+
+vendas[linha][coluna];
+
+
+DECLARAÇÃO e CRIAÇÃO de uma matriz
+----------------------------------
+
+int[][] vendas = new int[5][4];
+
+Esse código cria cinco linhas, quatro colunas por linha, totalizando 20 posições.
+
+A posição[0][0] representa a primeiro alinha e a primeira coluna.
+
+A posição[3][2] representa a quarta linha e a terceira coluna.
+
+
+INICIALIZAÇÃO de uma matriz
+---------------------------
+
+int[][] vendas = {
+    {35, 18, 12, 22};
+    {40, 21, 15, 25};
+    {32, 20, 17, 19};
+    {45, 24, 13, 30};
+    {58, 31, 20, 42};
+};
+
+Cada um dos conjuntos internos representa uma linha da matriz ('array' de 'arrays').
+
+
+PERCORRENDO uma matriz
+----------------------
+
+Uma matriz pode ser percorrida com repetições aninhadas:
+
+for(int linha = 0; linha < vendas.length; linha++) {
+    for(int coluna = 0; coluna < vendas[linha].length; coluna++){
+        System.out.println(vendas[linha][coluna] + " ");
+    }
+    System.out.println()
+}
+
+
+Decifrando o percurso
+---------------------
+
+- Informando a quantidade de linhas:
+
+vendas.length;
+
+- Informando a quantidade de colunas da linha atual, já que a matriz pode ser assimétrica:
+
+vendas[linha].length;
+
+
+Matrizes IRREGULARES
+--------------------
+
+Exemplo:
+
+int[][] dados = new int[3][];
+dados[0] = new int[2];
+dados[1] = new int[4];
+dados[2] = new int[1];
+
+A primeira linha possui duas posições, a segunda quatro, e a terceira uma. Essa é a estrutura 
+chamada 'array' irregular ou JAGGED ARRAY.
+
+O percurso precisa consultar o comprimento de cada linha:
+
+for(int linha = 0; linha < dados.length; linha++){
+    for(int coluna = 0; coluna < dados[linha].length; coluna++){
+        System.out.println([linha][coluna] + " ");
+    }
+    System.out.println()
+}
+
+
+Nota: matrizes permitem representar informações organizadas em linhas e colunas, mas a forma como 
+      esses dados são estruturados depende da necessidade do problema.
+
+
+Exemplo ilustrando a utilização de uma matriz para organizar as vendas de uma lanchonete ao longo 
+da semana, relacionando DIAS e PRODUTOS está no arquivo:
+
+Faculdade\Algoritmos e Programação\Unidade_03\VendasLanchonete.java na pasta Java_Parte_Pratica.
+
+Na resolução do exercício, ficou claro que a escolha de uma estrutura de dados influencia
+diretamente a forma como as informações serão acessadas e processadas.
+
+No exemplo, a matriz permitiu organizar dados relacionados a produtos e dias, facilitando a realização
+de cálculos e comparações. Entretanto, diferentes situações podem exigir diferentes formas de 
+organização.
+
+------------------------
+Bibliografia recomendada
+------------------------ 
+
+RODRIGUES, Thiago N.; LEOPOLDINO, Fabrício L.; PESSUTTO, Lucas Rafael C.; et al. Estrutura de Dados em
+Java. Porto Alegre: SAGAH, 2021. E-book. p.41 a 62.
+
+Nota: o livro tem exercícios muito bons, porém ele chama um método 'ler' que não foi criado em 
+      nenhum deles, tornando alguns códigos impossíveis de executar.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
