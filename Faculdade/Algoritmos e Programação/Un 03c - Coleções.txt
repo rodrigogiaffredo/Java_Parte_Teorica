@@ -1,0 +1,596 @@
+
+--------------------------------
+MANIPULAÇÃO DE DADOS EM COLEÇÕES
+--------------------------------
+
+'Arrays' e matrizes organizam conjuntos de valores quando a quantidade de posições é conhecida.
+
+Já as COLEÇÕES oferecem operações prontas para adicionar, localizar e remover elementos de maneira 
+flexível.
+
+Listas encadeadas consituem estruturas de dados que utilizam alocação dinâmica de memória, ou seja, 
+não limito a quantidade de informações que serão inseridas nelas. Nessa estrutura de dados, 
+desenvolvo métodos para adição e remoção de informações, de modo que o tamanho da lista em tempo de 
+execução dependerá de como o sistema foi utilizado e quantas operações de inserção e deleção foram 
+realizadas. 
+
+Ainda no exemplo da lanchonete usado na aula sobre 'arrays' e matrizes, os pedidos entram e são 
+entregues ou cancelados de forma dinâmica, portanto tentar controlar pedidos fixando um limite máximo 
+de posições, e fazendo deslocamentos manuais para controlar sua movimentação, torna o código difícil de 
+usar e manter.
+
+Nesse contexto, coleções surgem como a solução ideal.
+
+
+CONCEITO de COLEÇÃO
+-------------------
+
+Coleção é um objeto que representa um grupo de objetos, tal como a clássica classe ArrayList.
+
+O Java Collections Framework é a API mais amplamente utilizada do JDK. 
+
+Fornece uma arquitetura comum para representar e manipular grupos de objetos. Ele é baseado em mais de
+uma dúzia de interfaces, e inclui implementações dessas interfaces usando algoritmos para manipulá-las.
+
+Composição resumida do framework:
+
+- Interfaces (como por exemplo 'sets', 'lists' e 'maps');
+- Implementações (diversas, tais como de propósito geral, de propósito especial, etc.);
+- Algoritmos (métodos estáticos que rodam métodos úteis, como por exemplo 'sort');
+- Métodos utilitários.
+
+As INTERFACES representam comportamentos gerais, enquanto as IMPLEMENTAÇÕES fornecem estruturas
+concretas. Por exemplo:
+
+List<String> pedidos = new ArrayList<>();
+
+Nesse código:
+
+- 'List' é a interface;
+- 'Arraylist' é a implementação;
+- 'String' é o tipo de elementos;
+- 'Pedidos' é a variável.
+
+A partir da introdução do Java Collections Framework, um método pode receber uma 'List' sem depender 
+diretamente de 'ArrayList':
+
+public static void exibirPedidos(List<String> pedidos) {
+    for(String pedido : pedidos) {
+        System.out.println(pedido);
+    }
+}
+
+Esse método pode trabalhar com diferentes implementações de 'List'.
+
+A Analogia da Sacola de Brinquedos
+----------------------------------
+
+Imagine que você tem um Robô Ajudante em casa. A única tarefa dele é pegar uma Sacola cheia de coisas,
+tirar os itens um por um lá de dentro e mostrar para você.
+
+Para o robô, não importa como essa sacola é por fora ou como ela foi feita. Ela pode ser:
+
+1. Uma Mochila de pano com zíper (que no Java chamaríamos por exemplo de 'ArrayList').
+2. Uma Sacola plástica de supermercado (que no Java cmamaríamos por exemplo de 'LinkedList').
+3. Uma Sacola de papel de presente.
+
+Para o robô, todas elas são apenas Sacolas (que é a nossa 'List'). Ele só precisa saber que pode 
+colocar a mão lá dentro e puxar as coisas.
+
+Traduzindo para o Código de forma simples
+-----------------------------------------
+
+- 'List<String> pedidos': aqui estou dizendo ao robô: "Você vai receber uma Sacola ('List') cheia de
+                          bilhetes com nomes de brinquedos ou pedidos ('String'). Não disse se é de 
+                          plástico ou de pano, apenas que é uma sacola.
+
+- 'for(String pedido : pedidos)': isso é o robô colocando a mão na sacola e dizendo: "Para cada 
+                                  papelzinho de pedido que eu encontrar aqui dentro..."
+
+- 'System.out.println(pedido)': "Vou ler o nome do pedido em voz alta."
+
+
+Vantagem dessa estrutura
+------------------------
+
+Se eu programasse o robô para aceitar apenas uma 'ArrayList' (a mochila de pano), o dia em que eu 
+estivesse sem essa mochila e tentasse entregar uma sacola plástica para ele, o robô ia travar e dizer:
+"Erro! Eu não sei ler coisas de sacolas plásticas!".
+
+Graças ao Java Collections Framework (que é o sistema do Java que organiza essas sacolas de dados), o 
+meu robô se torna super flexível. Ele aceita qualquer tipo de lista que eu entregar, economizando o meu
+trabalho de programar um robô diferente para cada tipo de sacola que existe no mundo.
+
+
+GENÉRICOS
+---------
+
+Genéricos permitem que seja definido, no momento da criação, qual tipo de dado a coleção armazenará, 
+evitando erros e tornando o código mais seguro. No exemplo abaixo, os símbolos '<>' indicam o tipo de 
+elemento armazenado pela coleção:
+
+ArrayList<String> nomes = new ArrayList<>(); // Armazena objetos 'String'.
+
+ArrayList<Integer> quantidades = new ArrayList<>(); // Armazena objetos 'Integer'.
+
+São os genéricos que ajudam o compilador a impedir inserções incompatíveis, como por exemplo:
+
+ArrayList<String> produtos = new ArrayList<>();
+produtos.add("Café"); // Entrada válida
+produtos.add(10); // Entrada inválida
+
+
+INTERFACE LIST 
+--------------
+
+Uma 'List' representa uma sequência ordenada de elementos:
+
+- mantendo uma ordem;
+- permitindo elementos repetidos;
+- posuindo índices;
+- permitindo acesso posicional;
+- podendo aumentar ou diminuir.
+
+Ela mantém a ordem de iteração e fornece índices para seus elementos.
+
+
+CRIAÇÃO de uma LIST
+-------------------
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+List<String> pedidos = new ArrayList<>();
+
+
+OPERAÇÕES com 'ArrayList'
+-------------------------
+
+Pensando no cenário de gestão dos pedidos na lanchonete, temos:
+
+- Inserção no FINAL da lista: método 'add'.
+
+pedidos.add("Café");
+pedidos.add("Suco");
+pedidos.add("Bolo");
+
+- INSERÇÃO numa POSIÇÃO ESPECÍFICA da lista: método 'add' com referência à posição desejada.
+
+pedidos.add(1, "Sanduíche");
+
+- ACESSO ao PRIMEIRO pedido da lista: método 'get'.
+
+String primeiro = pedidos.get(0);
+
+- ALTERAÇÃO de um determinado pedido: método 'set'.
+
+pedidos.set(1, "Suco de laranja");
+
+- REMOÇÃO de item por VALOR: método 'remove'.
+
+pedidos.remove("Bolo");
+
+- REMOÇÃO de item por ÍNDICE: método 'remove' com referência à posição desejada.
+
+pedidos.remove(0);
+
+- VERIFICAÇÃO da EXISTÊNCIA de um pedido: método 'contains'.
+
+boolean existe = pedidos.contains("Café");
+
+- TAMANHO da lista de pedidos: método 'size'.
+
+int quantidade = pedidos.size();
+
+- VERIFICANDO se a lista está VAZIA: método 'isEmpty'.
+
+boolean vazia = pedidos.isEmpty();
+
+- LIMPEZA da lista: método 'clear'.
+
+pedidos.clear();
+
+
+Diferença entre remoção por ÍNDICE e por VALOR
+----------------------------------------------
+
+Para evitar confusões com o método 'remove()' quando a lista contiver números, é importante esclarecer 
+a diferença entre remoção por índice e por valor. Exemplo aplicado a seguinte lista de números:
+
+List<Integer> numeros = new ArrayList<>();
+numeros.add(10);
+numeros.add(20);
+numeros.add(30);
+
+A instrução 'numeros.remove(1);' remove o elemento do índice 1, que é o número 20.
+
+Para remover o VALOR INTEIRO '1' (se houvesse), seria necessário usar o método 'valueOf':
+
+numeros.remove(Integer.valueOf(1));
+
+Esse detalhe ocorre porque o método 'remove()' possui as chamadas versões sobrecarregadas.
+
+
+PERCURSO de uma LIST
+--------------------
+
+A manipulação de elementos em uma lista depende da forma como o programa acessa os dados dela. Cada 
+estratégia de percurso oferece diferentes níveis de controle sobre os elementos e pode ser utilizada 
+conforme a necessidade da aplicação.
+
+- percurso usando FOR: utilizado quando é necessário acessar a POSIÇÃO (ÍNDICE) do elemento.
+
+for(int i = 0; i < pedidos.size(); i++) {
+    System.out.println(pedidos.get(i));
+}
+
+- percurso usando FOR-EACH: utilizado quando basta percorrer todos os elementos para leitura.
+
+for(String pedido: pedidos) {
+    System.out.println(pedido);
+}
+
+- percurso usando ITERATOR: utilizado quando é necessário remover elementos durante o percurso ou 
+                            controlar explicitamente a iteração.
+
+import java.util.Iterator;
+Iterator<String> iterador = pedidos.iterator();
+while(iterador.hasNext()) {
+    String pedido = iterador.next();
+    System.out.println(pedido);
+}
+
+Nota: iterar sobre os elementos de uma coleção usando este objeto é um processo de dois passos.
+
+1- Primeiro devo verificar se há mais elementos a serem visitados via método 'hasNext()'
+2- Então posso avançar para o próximo elemento com o método 'next()'.
+
+Isso evita o erro 'NoSuchElementException' no caso de não haver mais elementos a serem visitados na 
+coleção, o que faz a chamada 'hasNext()' bastante proveitosa, mesmo que não obrigatória.
+
+
+Exemplo de REMOÇÃO DURANTE o percurso
+-------------------------------------
+
+CÓDIGO PROBLEMÁTICO:
+--------------------
+
+for(String pedido: pedidos) {
+    if(pedido.equals("Café")) {
+        pedidos.remove(pedido);
+    }
+}
+
+A modificação direta pode provocar uma 'ConcurrentModificationException'.
+
+
+FORMA ADEQUADA USANDO ITERATOR:
+-------------------------------
+
+Iterator<String> iterador = pedidos.iterator();
+while(iterador.hasNext()) {
+    String pedido = iterador.next();
+    if(pedido.equals("Café")) {
+        iterador.remove();
+    }
+}
+
+OUTRA POSSIBILIDADE USANDO REMOVEIF():
+--------------------------------------
+
+pedidos.removeif(
+    pedido -> pedido.equalsIgnoreCase("Café")
+);
+
+
+------------------------
+BIBLIOGRAFIA RECOMENDADA
+------------------------
+
+RODRIGUES, Thiago N.; LEOPOLDINO, Fabrício L.; PESSUTTO, Lucas Rafael C.; et al. Estrutura de Dados 
+em Java. Porto Alegre: SAGAH, 2021. E-book. p.97 a 112.
+
+
+-------------
+INTERFACE SET 
+-------------
+
+Usada quando preciso IMPEDIR que elementos DUPLICADOS sejam armazenados na coleção.
+
+Ou seja, para situações em que a UNICIDADE de informações é fundamental, o Java oferece a interface 
+'Set', uma estrutura de dados voltada para o armazenamento de elementos sem repetição.
+
+import java.util.HashSet;
+import java.util.Set;
+
+Set<String> codigosUtilizados = newHashSet<>();
+
+- Exemplo de INSERÇÃO onde o valor inserido testará o boleano 'false', pois o elemento já existe:
+
+codigosUtilizados.add("PROMO10");
+codigosUtilizados.add("CLIENTE20");
+
+// Tentativa de duplicação
+boolean inserido = codigosUtilizados.add("PROMO10");
+
+- Exemplo de VERIFICAÇÃO se um valor já existe na coleção usando o método 'contains':
+
+boolean utilizado = codigosUtilizados.contains("PROMO10");
+
+- Exemplo de REMOÇÃO de um valor, com posterior percurso para verificação da coleção resultante:
+
+codigosUtilizados.remove("PROMO10");
+
+// Percurso 
+for(String codigo: codigosUtilizados) {
+    System.out.println(codigo);
+}
+
+
+ATENÇÃO: um 'HashSet' não deve ser utilizado quando a posição dos elementos é importante. Ele não 
+         oferece acesso por índice.
+
+
+-------------
+INTERFACE MAP
+-------------
+
+Quando não basta apenas armazenar informações únicas, mas é necessário RELACIONAR um dado a outro para 
+facilitar sua localização, e essa relação entre os dados é tão importante quanto o próprio valor 
+armazenado, o Java disponibiliza a interface 'Map', que organiza informações em pares formados por 
+CHAVE e VALOR.
+
+Exemplo associando produtos da lanchonete a códigos únicos:
+
+import java.util.HashMap;
+import java.util.Map;
+
+Map<Integer, String> produtos = new HashMap<>();
+
+// Cada chave identifica um valor:
+produtos.put(101, "Café");
+produtos.put(205, "Suco");
+produtos.put(310, "Bolo");
+
+
+- RECUPERANDO valores via método 'get()':
+
+String produto = produtos.get(205);
+
+- VERIFICANDO chaves via método 'containsKey()':
+
+boolean possuiCodigo = produtos.containsKey(205);
+
+- VERIFICANDO valores via método 'containsValue()':
+
+boolean possuiProduto = produtos.containsValue("Bolo");
+
+- REMOVENDO produto por índice via método 'remove()':
+
+produtos.remove(310);
+
+- MEDINDO o TAMANHO da coleção via método 'size()':
+
+int quantidade = produtos.size();
+
+
+ATENÇÃO: as chaves devem ser únicas. Quando um novo valor é associado a uma chave existente, o valor 
+         anterior é substituído:
+
+         produtos.put(205, "Suco de Laranja");
+
+
+------------------
+PERCORRENDO um MAP 
+------------------
+
+Um objeto 'Map' pode ser percorrido de três maneiras, dependendo da informação que se deseja acessar:
+
+1- Percurso das CHAVES: uso o método 'keySet()' quando apenas as chaves são necessárias.
+
+for(Integer codigo: produtos.keySet()) {
+    System.out.println(codigo);
+}
+
+
+2- Percurso dos VALORES: uso o método 'values()' quando apenas os valores interessam.
+
+for(String produto: produto.values()) {
+    System.out.println(produto);
+}
+
+
+3- Percurso dos PARES: uso o método 'entrySet()' quando é necessário acessar chave e valor juntos.
+
+for(Map.Entry<Integer, String> entrada: produtos.entrySet()) {
+    System.out.printf("Código: %d | Produto: %s%n",
+    entrada.getKey(),
+    entrada.getValue()
+    )
+};
+
+
+Exemplo de uso do 'map' para CONTAR quantas vezes cada produto foi vendido:
+
+String[] vendas = {
+    "Café",
+    "Suco",
+    "Café",
+    "Bolo",
+    "Café",
+    "Suco"
+};
+
+Map<String, Integer> contagem = new HashMap<>();
+
+Para fazer a contagem, o programa precisa verificar se o produto já foi registrado no 'Map'. Caso sim, 
+o valor associado à chave deve ser atualizado; caso contrário, uma nova entrada precisa ser criada.
+
+Essa lógica pode ser implementada de diferentes maneiras em Java. Duas abordagens possíveis são:
+
+1- Forma DETALHADA:
+
+for(String produto: vendas) {
+    if(contagem.containsKey(produto)) {
+        int quantidadeAtual = contagem.get(produto);
+        contagem.put(produto, quantidadeAtual + 1);
+    }
+    else {
+        contagem.put(produto, 1);
+    }
+}
+
+
+2- Forma com 'getOrDefault()':
+
+for(String produto: vendas) {
+    int quantidadeAtual = contagem.getOrDefault(produto, 0);
+    contagem.put(produto, quantidadeAtual + 1);
+}
+
+
+RESULTADO de ambas as formas:
+
+Café -> 3
+Suco -> 2
+Bolo -> 1
+
+
+---------------
+INTERFACE QUEUE
+---------------
+
+A interface 'Queue' se refere à fila, e representa uma organização em que os elementos normalmente 
+são processados conforme a ordem de chegada com base no princípio FIFO (First In, First Out).
+
+Exemplo com base na entrada e saída de pedidos na lanchonete:
+
+import java.util.ArrayDeque;
+import java.util.Queue;
+
+Queue<String> filaPedidos = newArrayDeque<>();
+
+// INSERÇÃO de pedidos via método 'offer()'
+filaPedidos.offer("Pedido 101");
+filaPedidos.offer("Pedido 102");
+filaPedidos.offer("Pedido 103");
+
+// CONSULTA do primeiro pedido via método 'peek()'
+String proximo = filaPedidos.peek();
+
+// REMOÇÃO do primeiro pedido atendido via método 'poll()'
+String atendido = filaPedidos.poll();
+
+Nota: após a remoção do pedido 101, o pedido 102 passa a ser o primeiro.
+
+
+-------------------
+ORDENAÇÃO DE LISTAS 
+-------------------
+
+A classe 'Collections' oferece métodos estáticos que operam sobre coleções.
+
+Exemplo de ordenação CRESCENTE via método 'sort()':
+
+List<Integer> valores = newArrayList<>();
+valores.add(30);
+valores.add(10);
+valores.add(20);
+Collections.sort(valores);
+
+// O resultado será [10, 20, 30].
+
+
+Exemplo de ordenação DECRESCENTE via método 'reverseOrder()':
+
+Collections.sort(
+    valores,
+    Collections.reverseOrder()
+);
+
+// O resultado será [30, 20, 10].
+
+
+------------------------------
+ARRAY OU ARRAYLIST: QUAL USAR?
+------------------------------
+
+Devo considerar usar 'ArrayList' quando o programa precisar percorrer elementos ou acessá-los por 
+índices, destacando que a escolha da implementação depende do padrão de uso.
+
+
+Critério                        Array                       ArrayList
+-----------------------------------------------------------------------------------------------------
+Tamanho                         Fixo                        Variável
+Tipos primitivos                Aceita diretamente          Utiliza classes empacotadoras
+Acesso por índice               Sim                         Sim 
+Inserção pronta                 Não                         Sim 
+Remoção pronta                  Não                         Sim 
+Propriedade de tamanho          length                      size() 
+Sintaxe de acesso               array[i]                    lista.get(i) 
+Alteração                       array[i] = valor            lista.set(i, valor)
+
+
+Voltando ao problema inicial da lanchonete, sei que ela precisará controlar:
+
+- Os pedidos pendentes;
+- Os códigos promocionais utilizados;
+- Os nomes dos produtos associados aos códigos;
+- A quantidade vendida de cada produto.
+
+Portanto, a solução poderá utilizar estruturas diferentes, de acordo com o problema:
+
+// PEDIDOS PENDENTES 
+List<String> pedidosPendentes = new ArrayList<>();
+
+// CÓDIGOS PROMOCIONAIS ÚNICOS 
+Set<String> codigosUtilizados = new HashSet<>();
+
+// PRODUTOS POR CÓDIGO 
+Map<Integer, String> produtosPorCodigo = new HashMap<>();
+
+// CONTAGEM DE VENDAS 
+Map<String, Integer> quantidadeVendida = new HashMap<>();
+
+
+FLUXO RESUMIDO
+--------------
+
+1- Registrar pedidos: adiciona os pedidos à lista de pendentes.
+2- Cancelar um pedido: remove um pedido da lista de pendentes.
+3- Consultar um pedido: verifica se o pedido está na lista.
+4- Registrar códigos promocionais: adiciona códigos ao conjunto de utilizados (sem repetição).
+5- Associar código e produto: relaciona cada código promocional a um produto.
+6- Contar vendas: incrementa a quantidade vendida de um produto.
+
+--------------------------------------------------------------------------------------------
+EXERCÍCIO COMPLETO RESOLVIDO NA PASTA Java_Parte_Pratica/Faculdade/Algoritmos_e_Programacao/
+Unidade_03 NO ARQUIVO VendasLanchoneteColecoes.java
+--------------------------------------------------------------------------------------------
+
+------
+RESUMO 
+------
+
+- List: mantém a sequência permitindo repetições
+- Set: não permite repetições
+- Map: relaciona chaves e valores
+- Queue: ordem FIFO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
