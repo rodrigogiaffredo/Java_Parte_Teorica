@@ -1,0 +1,107 @@
+
+
+Profa. Giuliana Bezerra
+
+-------
+PACOTES
+-------
+
+Em Java, pacotes são agrupamentos de classes semelhantes em alguns aspectos. Posso pensar os pacotes 
+como diretórios.
+
+Sintaxe para nomeação dos pacotes criados pelo desenvolvedor
+------------------------------------------------------------
+
+Na primeira linha do arquivo, a declaração é feita através da palavra reservada 'package'.
+
+package <sigla país>.com.<empresa>.<nome do projeto>;
+
+Nota: '.com.' pode ser '.edu.', '.net.', '.gov.', a depender do segmento de atuação da empresa onde o 
+      pacote estiver sendo criado.
+
+
+Um exemplo dado pela professora:
+
+package br.com.giulianabezerra.pacotes;
+
+Cada ponto '.' representa um novo diretório, e por convenção o nome do pacote é sempre em letras 
+minúsculas e sem símbolos, acentos ou caracteres especiais.
+
+O nome do pacote é importante também para formar um nome completo qualificado para a classe.
+
+Em grandes projetos, podemos ter conflitos de nomes, quando por exemplo várias empresas grandes criam 
+suas próprias classes 'User' - nome comum, passível de aparecer em diversos sistemas.
+
+A depender do pacote em que a classe se encontra, sei qual classe usar.
+
+Por analogia, é como se alguém se identificasse usando nome completo, CPF e endereço, ao invés de 
+usando somente o primeiro nome.
+
+A classe 'User' do exemplo terá o nome completo qualificado 'br.com.xpto.User' que a tornará única.
+
+O tema 'pacotes' encerra o ciclo de aprendizagens das estruturas básicas do Java, que são:
+
+                                          HIERARQUIA
+
+                                    PROGRAMA JAVA - PROJETO JAVA
+
+                           ----------------------------------------------
+                           |                                            |
+                           |        Código-fonte (arquivo.java)         |
+                           |                                            |
+                           |  ----------------------------------------  |
+                           |  |                                      |  |
+                           |  |                  Pacote              |  |
+                           |  |                                      |  |
+                           |  |  ----------------------------------  |  |
+                           |  |  |                                |  |  |
+                           |  |  |              Classe            |  |  |
+                           |  |  |                                |  |  |
+                           |  |  |  ----------------------------  |  |  |
+                           |  |  |  |                          |  |  |  |
+                           |  |  |  |          Método          |  |  |  |
+                           |  |  |  |                          |  |  |  |
+                           |  |  |  |   --------------------   |  |  |  |
+                           |  |  |  |   |                  |   |  |  |  |
+                           |  |  |  |   |      Comando     |   |  |  |  |
+                           |  |  |  |   |                  |   |  |  |  |
+                           |  |  |  |   --------------------   |  |  |  |
+                           |  |  |  ----------------------------  |  |  |
+                           |  |  ----------------------------------  |  |
+                           |  ----------------------------------------  |
+                           ----------------------------------------------
+
+
+Nota: para acessar classes que não estão no mesmo pacote em que o arquivo .java está localizado, uso 
+      a sintaxe 'import', adicionando o nome da classe ao endereço da chamada (o nome completo 
+      qualificado da classe).
+
+      Ou seja:
+
+      - Arquivo .java em uso está no mesmo pacote da outra classe que quero acessar:
+            Sintaxe: package br.com.xpto.Pacote;
+
+      - Arquivo .java em uso está em pacote diferente da outra classe que quero acessar:
+            Sintaxe: import br.com.xpto.pacote.Classe;
+
+
+A importância do uso do nome completo qualificado da classe reside no fato de ele torná-la única, então
+no ato da importação garanto o uso da classe correta, e não de uma outra que apesar de possuir o mesmo
+nome de classe, não possui o mesmo endereço de classe.
+
+Existe um pacote especial no Java chamado 'java.lang', onde estão por exemplo as classes 'String', 
+'System', e outras muito utilizadas nos programas. Essa classe não precisa ser importada, pois isso 
+é feito automaticamente a partir da criação do arquivo .java.
+
+A sintaxe 'import' é usada também para importar as classes definidas nas bibliotecas do próprio Java.
+
+
+
+
+
+
+
+
+
+
+
