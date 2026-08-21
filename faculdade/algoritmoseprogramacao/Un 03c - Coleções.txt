@@ -149,7 +149,7 @@ OPERAÇÕES com 'ArrayList'
 
 Pensando no cenário de gestão dos pedidos na lanchonete, temos:
 
-- Inserção no FINAL da lista: método 'add'.
+- INSERÇÃO no FINAL da lista: método 'add'.
 
 pedidos.add("Café");
 pedidos.add("Suco");
@@ -231,8 +231,8 @@ for(String pedido: pedidos) {
     System.out.println(pedido);
 }
 
-- percurso usando ITERATOR: utilizado quando é necessário remover elementos durante o percurso ou 
-                            controlar explicitamente a iteração.
+- percurso usando ITERATOR: utilizado quando é necessário REMOVER elementos DURANTE o percurso ou 
+                            CONTROLAR explicitamente a iteração.
 
 import java.util.Iterator;
 Iterator<String> iterador = pedidos.iterator();

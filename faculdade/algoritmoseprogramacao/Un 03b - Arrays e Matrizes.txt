@@ -198,8 +198,8 @@ Alteração com FOR-EACH
 Se usar o código abaixo, o 'array' original não será modificado. A variável 'valor' receberá uma 
 cópia de cada valor primitivo:
 
-int[]valores = {10, 20, 30};
-for(int valor:valores) {
+int[] valores = {10, 20, 30};
+for(int valor: valores) {
     valor = valor * 2;
 }
 
@@ -254,21 +254,21 @@ Utilização da CLASSE ARRAYS
 A classe 'java.util.Arrays' oferece métodos para manipulação de 'arrays', incluindo ordenação 
 e busca.
 
-- Importando a classe que disponibiliza métodos para manipular 'arrays':
+- IMPORTANDO a classe que disponibiliza métodos para manipular 'arrays':
 
   import java.util.Arrays;
 
-- Exibindo o conteúdo do 'array' de forma legível:
+- EXIBINDO o conteúdo do 'array' de forma legível:
 
   int[] valores = {8, 2, 5, 1};
   System.out.println(Arrays.toString(valores));
 
-- Ordenando os elementos do 'array' em ordem crescente:
+- ORDENANDO os elementos do 'array' em ordem crescente:
 
   Arrays.sort(valores);
   // O conteúdo passa a ser: [1, 2, 5, 8]
 
-- Buscando um elemento no 'array' ORDENADO  e retornando sua posição (busca binária):
+- BUSCANDO um elemento no 'array' ORDENADO  e retornando sua posição (busca binária):
 
   int posicao = Arrays.binarySearch(valores, 5);
 
@@ -277,11 +277,11 @@ e busca.
   Arrays.sort(valores);
   int posicao = Arrays.binarySearch(valores, 5);
 
-- Criando uma cópia do 'array' original:
+- Criando uma CÓPIA do 'array' original:
 
   int[] copia = Arrays.copyOf(valores, valores.length);
 
-- Preenchendo todas as posição do 'array' com um valor específico:
+- PREENCHENDO todas as posição do 'array' com um valor específico:
 
   int[] estoque = new int[5];
   Arrays.fill(estoque, 10);

@@ -1,0 +1,333 @@
+
+-----------------------------------
+RESOLVENDO PROBLEMAS COM ESTRUTURAS 
+-----------------------------------
+
+Recaptuação da unidade 03
+-------------------------
+
+- conceito de estrutura de dados;
+- arrays;
+- matrizes;
+- listas;
+- conjuntos;
+- mapas;
+- filas;
+- principais operações de manipulação.
+
+Exemplo aplicado na reconstrução do sistema de lanchonete, cujos novos requisitos são:
+--------------------------------------------------------------------------------------
+
+- cardápio com códigos únicos para os produtos;
+- pedidos mantidos na ordem de registro;
+- códigos promocionais de uso único;
+- vendas semanais organizadas por dia e produto;
+- contagem de quantas unidades de cada produto foram vendidas;
+- localização rápida de produtos por código;
+- pedidos concluídos removíveis da fila de preparação.
+
+O fluxograma abaixo ajuda na identificação da estrutura de dados Java mais adequada para diferentes 
+problemas de programação:
+
+                                    Qual a necessidade principal?
+                                                |
+                                                |
+           --------------------------------------------------------------------------
+           |                                    |                                   |
+           |                                    |                                   |
+     ------------------------              --------------------              --------------------
+     |    Organização por   |              |   Dinâmica e     |              |    Regras de     |
+     |  quantidade e forma  |              |  relacionamento  |              |   armazenamento  |
+     |                      |              |    de dados      |              |   específicas    |
+     ------------------------              --------------------              --------------------
+                |                                   |                                   |
+                |                                   |                                   |
+------------------------------  ---------------------------------------  ------------------------------
+|  - Array: tamanho Fixo     |  |  - ArrayList: sequências variáveis  |  |- HashSet: sem duplicidades |
+|  - Matriz: linhas&colunas  |  |  - HashMap: associações por chave   |  |- Queue: gerencia ordem     |
+------------------------------  ---------------------------------------  ------------------------------
+
+
+----------------------------------------------
+|               CONSULTA RÁPIDA              | 
+----------------------------------------------
+|       NECESSIDADE         |    ESTRUTURA   | 
+----------------------------------------------
+| Tamanho fixo              |    Array       |
+| Linhas & colunas          |    Matriz      |
+| Sequências variáveis      |    ArrayList   |
+| Associações por chave     |    HashMap     |
+| Sem duplicidades          |    HashSet     |
+| Gerenciamento da ordem    |    Queue       |
+----------------------------------------------
+
+
+Porém antes mesmo de decidir sobre a estrutura, é preciso compreender profundamente o problema, e para 
+isso é fundamental aprofundar a ANÁLISE DE REQUISITOS:
+
+- quais DADOS serão armazenados?
+- os elementos possuem o mesmo TIPO?
+- a QUANTIDADE é conhecida?
+- a quantidade pode CRESCER?
+- a ORDEM precisa ser mantida?
+- elementos REPETIDOS são permitidos?
+- precisa de acesso por CHAVE ou ÍNDICE?
+- quais OPERAÇÕES serão mais frequentes?
+- apresentar dados em LINHAS e COLUNAS?
+- prioridade é LEGIBILIDADE, VELOCIDADE, MEMÓRIA ou SIMPLICIDADE?
+
+
+------------------------------------
+PROCESSO DE RESOLUÇÃO EM SEIS ETAPAS
+------------------------------------
+
+A escolha de uma estrutura de dados não deve acontecer por tentativa ou hábito, mas a partir de uma 
+análise cuidadosa do problema. Considerar os dados envolvidos, as operações necessárias e os objetivos
+da aplicação permite construir soluções mais organizadas e eficientes.
+
+O processo de resolução em seis etapas apresenta um caminho para orientar essa tomada de decisão, 
+desde a compreensão do problema até a avaliação da solução implementada.
+
+
+Etapa 1 - Compreender a entrada
+-------------------------------
+    Identificar quais dados chegam ao programa, como por exemplo:
+        - código do produto
+        - nome do produto 
+        - quantidade vendida 
+        - dia da venda 
+        - código promocional 
+        - número do pedido
+
+Etapa 2 - Definir a saída 
+-------------------------
+    Determinar o que o programa deverá apresentar, como por exemplo:
+        - produto localizado pelo código 
+        - total vendido por produto 
+        - dia com maior movimento 
+        - pedidos ainda pendentes 
+        - códigos promocionais já utilizados 
+
+Etapa 3 - Identificar as operações 
+----------------------------------
+    Exemplos:
+        - inserir pedido 
+        - buscar produto 
+        - remover pedido concluído 
+        - contar vendas 
+        - verificar duplicidade 
+        - somar valores 
+        - percorrer dados 
+        - produzir relatório 
+
+Etapa 4 - Selecionar a estrutura 
+--------------------------------
+    Relacionar cada necessidade a uma estrutura potencial.
+
+Etapa 5 - Implementar e testar 
+------------------------------
+    Criar exemplos pequenos e verificar os limites.
+
+Etapa 6 - Avaliar a solução 
+---------------------------
+    Analisar se:
+        - o código está legível
+        - a estrutura representa o problema 
+        - as operações são simples 
+        - existem repetições de código desnecessárias 
+        - a solução permite escalar em caso de aumento no volume de dados
+
+
+-------------------------------
+ANÁLISE DE CRITÉRIOS DA SOLUÇÃO
+-------------------------------
+
+Critério 1 - Quantidade FIXA ou VARIÁVEL?
+-----------------------------------------
+
+- Quantidade fixa: por exemplo, o programa sempre armazenará as vendas dos sete dias da semana.
+  Estrutura possível:
+  
+  double[] vendasDiarias = new double[7];
+
+- Quantidade variável: por exemplo, o número de pedidos muda ao longo do dia.
+  Estrutura possível:
+
+  List<String> pedidos = new ArrayList<>();
+
+
+Critério 2 - Ordem 
+------------------
+
+Quando a ordem é importante, tenho que definir qual tipo de ordem deve ser preservado.
+
+- Ordem de inserção: por exemplo, uma 'List' que mantenha a sequência de cadastro.
+  
+  List<String> pedidos = new ArrayList<>();
+
+- Ordem de atendimento: por exemplo, uma 'Queue' pode representar a retirada do primeiro elemento.
+
+  Queue<String> fila = new ArrayDeque<>();
+
+- Ordem alfabética ou numérica: exemplos onde é necessário ordenar uma lista.
+
+  Collections.sort(produtos);
+
+
+Critério 3 - Duplicidades 
+-------------------------
+
+- Quando elementos repetidos são válidos, por exemplo o produto "Café" podendo aparecer várias vezes 
+  porque representa vendas diferentes.
+
+  List<String> produtosVendidos = new ArrayList<>();
+
+- Quando elementos repetidos não são permitidos, por exemplo o mesmo código promocional podendo ser 
+  utilizado apenas uma vez.
+
+  Set<String> codigosUtilizados = new HashSet<>();
+
+
+Critério 4 - Índice ou Chave 
+----------------------------
+
+- Acesso por índice, por exemplo qual produto ocupa a primeira posição no cadastro do sistema.
+
+  List<String> produtos = new ArrayList<>();
+  String primeiro = produtos.get(0);
+
+- Acesso por chave, por exemplo saber qual o produto com código 205.
+
+  Map<Integer, String> produtosPorCodigo = new HashMap<>();
+  String produto = produtosPorCodigo.get(205);
+
+
+Critério 5 - Organização tabular 
+--------------------------------
+
+Quando o problema possui duas dimensões, uma matriz pode ser adequada, por exemplo num cardápio com 
+quatro produtos, saber os produtos vendidos por dia útil da semana (cinco dias).
+
+int[][] vendas = new int[5][4];
+
+
+Critério 6 - Legibilidade 
+-------------------------
+
+A escolha da estrutura não deve considerar apenas se o programa funciona, mas também se outra pessoa 
+conseguirá compreender e manter o código.
+
+É possível criar um código tecnicamente correto, porém difícil de compreender e manter.
+
+String[] produtos = new String[100];
+int quantidade = 0;
+
+Nesse caso será necessário controlar a quantidade ocupada, as posições vazias, o limite da estrutura, 
+os deslocamentos e as remoções.
+
+Por isso, uma lista pode tornar a intenção mais clara e viável:
+
+List<String> produtos = new ArrayList<>();
+
+
+Critério 7 - Eficiência 
+-----------------------
+
+Eficiência pode envolver tempo de execução, quantidade de memória e de operações, facilidade de 
+crescimento, e custos de inserção, busca e remoção.
+
+Eficiência portanto não significa escolher sempre a estrutura mais complexa, já que ela não é 
+automaticamente a melhor. A escolha deve ser proporcional ao problema, por exemplo:
+
+- situação 1: o programa armazena cinco nomes e realiza uma única busca. Uma busca linear é simples e 
+              provavelmente suficiente.
+
+- situação 2: um sistema armazena milhões de registros e realiza milhares de buscas. A estrutura e o 
+              algoritmo de busca precisam receber maior atenção.
+
+
+----------------------------
+EXEMPLO DE TABELA DE DECISÃO
+----------------------------
+
+-----------------------------------------------------------------------------------------------
+|               PERGUNTA                            | RESPOSTA    |    ESTRUTURA POTENCIAL    |
+-----------------------------------------------------------------------------------------------
+| A quantidade é fixa?                              |    Sim      |     Array                 |
+| Os dados formam linhas e colunas?                 |    Sim      |     Matriz                |
+| A quantidade varia?                               |    Sim      |     ArrayList             | 
+| Os dados precisam manter sequência?               |    Sim      |     List                  |
+| Os elementos devem ser únicos?                    |    Sim      |     Set                   |
+| Os valores são localizados por chave?             |    Sim      |     Map                   |
+| O primeiro elemento inserido deve sair primeiro?  |    Sim      |     Queue                 | 
+| O acesso frequente é realizado por índice?        |    Sim      |     Array ou ArrayList    | 
+-----------------------------------------------------------------------------------------------
+
+
+-----------------------------------------------------
+CASO INTEGRADO: RECONSTRUÇÃO DO SISTEMA DA LANCHONETE 
+-----------------------------------------------------
+
+Requisito 1 - Cardápio por código onde cada código identifica um produto.
+---------------------------------
+Decisão: MAPA. 
+Justificativa: um mapa permite recuperar o produto pela chave.
+
+Map<Integer, String> cardapio = new HashMap<>();
+
+Requisito 2 - Pedidos em ordem de registro 
+------------------------------------------
+Decisão: LISTA.
+Justificativa: a lista mantém uma sequência e aceita repetições.
+
+List<String> pedidosRegistrados = new ArrayList<>();
+
+Requisito 3 - Preparação na ordem de chegada 
+--------------------------------------------
+Decisão: FILA.
+Justificativa: a fila representa o atendimento FIFO.
+
+Queue<String> filaPreparacao = new ArrayDeque<>();
+
+Requisito 4 - Códigos promocionais únicos 
+-----------------------------------------
+Decisão: SET.
+Justificativa: o conjunto impede a duplicação lógica dos códigos.
+
+Set<String> codigosUtilizados = new HashSet<>();
+
+Requisito 5 - Vendas por dia e produto 
+--------------------------------------
+Decisão: MATRIZ.
+Justificativa: a matriz representa duas dimensões.
+
+int[][] vendasSemana = new int[5][4];
+
+Requisito 6 - Contagem por produto 
+----------------------------------
+Decisão: MAPA.
+Justificativa: o produto funciona como chave, a quantidade como valor.
+
+Map<String, Integer> quantidadeVendida = new HashMap<>();
+
+
+-----------------------
+APLICAÇÃO PASSO A PASSO
+-----------------------
+
+Sistema construído na pasta Java_Parte_Pratica no arquivo NovoSistemaLanchonete.java localizado em 
+faculdade/algoritmoseprogramacao/unidade03.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
