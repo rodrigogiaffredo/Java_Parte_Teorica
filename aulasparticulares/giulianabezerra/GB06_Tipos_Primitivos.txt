@@ -1,0 +1,78 @@
+
+
+Profa. Giuliana Bezerra
+
+----------------
+TIPOS PRIMITIVOS
+----------------
+
+Cada tipo de dado armazenado numa variável terá um tratamento adequado à sua natureza. Nesse contexto 
+surgem os tipos primitivos, que são tipos simples que contém um valor.
+
+Categorias
+----------
+
+- Tipos para Caractere: R, r, %
+- Tipos para Inteiros: 10, -8
+- Tipos para Decimais: 1.5, 3.9
+- Tipo Booleano: True, False
+
+Além de saber que cada variável é um container de determinado tipo de dado, é importante notar que cada 
+tipo ocupa um determinado espaço na memória.
+
+O espaço ocupado pela variável na JVM é um fator determinante na escolha do tipo.
+
+---------
+CARACTERE 
+---------
+Tipo: char
+Tamanho: 16 bits
+Descrição: ASCII de 0 à 255
+
+Sintaxe (usa aspas simples ''): char nota = 'A';
+                                char simbolo = '%';
+
+--------
+INTEIROS
+--------
+Tipo: byte          Tipo: short         Tipo: int               Tipo: long
+Tamanho: 8 bits     Tamanho: 16 bits    Tamanho: 32 bits        Tamanho: 64 bits 
+Faixa: -128 a 127   Faixa: -32K a 32K   Faixa: números grandes  Faixa: números muito grandes
+
+Sintaxe: byte nota = 10;
+         int rg = 246866809
+
+--------
+DECIMAIS
+--------
+Tipo: float                 Tipo: double
+Tamanho: 32 bits            Tamanho: 64 bits
+Faixa: decimais grandes     Faixa: decimais muito grandes
+
+Sintaxe: float aliquota = 27.5f; // O 'f' após o número é o que avisa que se trata de um número float.
+         double preco = 99.53;
+
+--------
+BOOLEANO 
+--------
+Tipo: boolean 
+Tamanho: 1 bit 
+Descrição: Verdadeiro ou Falso 
+
+Sintaxe: boolean estaEntendendo = true;
+         boolean fezAnotacoes = true;
+         boolean achandoDificil = false;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
