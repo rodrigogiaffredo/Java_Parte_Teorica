@@ -1,0 +1,51 @@
+
+-----------------------------------
+IMPLEMENTAÇÃO PRÁTICA DE ALGORITMOS
+-----------------------------------
+
+Um código que compila não necessariamente representa um programa que funciona, pois a sintaxe correta 
+não garante a LÓGICA nem a ESTRUTURA DE DADOS adequada.
+
+
+---------------------------------------------
+O CICLO DE IMPLEMENTAÇÃO EFICAZ DE ALGORITMOS 
+---------------------------------------------
+
+Fase de CONCEPÇÃO e LÓGICA
+--------------------------
+- Compreender e planejar: identificar entradas e resultados esperados antes de dividir o problema em 
+                          etapas menores.
+
+- Compilar != estar correto: a compreensão do código pela máquina não garante que a lógica de negócio 
+                             esteja correta.
+
+
+Fase de CONSTRUÇÃO e QUALIDADE
+------------------------------
+- Implementação estruturada: organizar o código em métodos e utilizar estruturas de dados adequadas ao 
+                             planejamento.
+
+- Teste e melhoria contínua: comparar os resultados obtidos com os esperados e corrigir divergências 
+                             lógicas.
+
+                             --------------------------------------------------------------------------
+                             |    Guia rápido para validação de algoritmos durante a implementação    |
+                             --------------------------------------------------------------------------
+                             |  ETAPA DE TESTE   |                  AÇÃO NECESSÁRIA                   |
+                             --------------------------------------------------------------------------
+                             |1- Validação       |   Revisar requisitos e entradas de dados           |
+                             |2- Execução        |   Rodar o programa com diferentes cenários         |
+                             |3- Comparação      |   Analisar resultado esperado vs resultado obtido  |
+                             -------------------------------------------------------------------------- 
+
+
+
+
+
+
+
+
+
+
+
+
